@@ -1,8 +1,11 @@
 #! python3
-# Grabs the last 10 NYT obits and prepares the text of a FOIA request for their FBI files.
+# Grabs the last 10 NYT obits and prepares the text of a FOIA request for
+# their FBI files, then sends that request to the FBI
 
-import os, requests, json, datetime, re, getpass
+import os, requests, json, datetime, re, getpass, smtplib
 from datetime import datetime
+from email.header import Header
+from email.mime.text import MIMEText
 
 nyt_api_key = os.environ["NYT_API_KEY"]
 
@@ -15,10 +18,15 @@ api_results = json.loads(res.text)
 
 docs = api_results['response']['docs']
 
-address = input("From email address: ")
+from_address = input("From email address: ")
 emailpw = getpass.getpass("Email password: ")
 
-# todo: use email address and pw to mail this thing
+recipient_address = "fbi@example.com" # not the real address
+
+smtpObj = smtplib.SMTP('smtp.gmail.com',587)
+smtpObj.ehlo()
+smtpObj.starttls()
+smtpObj.login(from_address, emailpw)
 
 for i in docs:
     obit_source = "The New York Times" # May be more sources in the future, for now just NYT.
@@ -28,6 +36,8 @@ for i in docs:
     obit_URL = i['web_url']
 
     doc_request = "A copy of all documents or FBI files pertaining to {dead_person}, an obituary of whom was published in {obit_source} on {obit_date} under the headline \"{obit_headline}\" and can be found at {obit_URL}.".format(**locals())
+
+    email_subject = "FOIA Request, " + dead_person
 
     email_text = """
 FBI
@@ -52,12 +62,24 @@ Considering these three factors, my request should be furnished without charge o
 
 I am willing to pay up to $25 for the processing of this request. Please inform me if the estimated fees will exceed this limit before processing my request.
 
-Thank you for your consideration.
+Thank you for your consideration in this matter. I look forward to receiving your response to this request within 20 business days, as the statute requires.
 
 Parker Higgins
-FOIA The Dead""".format(**locals())
+FOIA The Dead
+602 Van Ness Ave Suite""".format(**locals())
 
-    print(email_text)
+    print("Preparing to send an email from {from_address} with the following request:\n".format(**locals()))
 
-    input()
+    print(doc_request)
+
+    input("\nLook good? ")
+
+    encoded_msg = MIMEText(email_text, 'plain', 'utf-8')
+    encoded_msg['Subject'] = Header(email_subject, 'utf-8')
+    encoded_msg['From'] = from_address
+    encoded_msg['To'] = recipient_address
+
+    smtpObj.sendmail(from_address, recipient_address, encoded_msg.as_string())
+
+    smtpObj.quit()
 
