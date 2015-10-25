@@ -1,7 +1,7 @@
 #! python3
 # Grabs the last 10 NYT obits and prepares the text of a FOIA request for their FBI files.
 
-import os, requests, json, datetime, re
+import os, requests, json, datetime, re, getpass
 from datetime import datetime
 
 nyt_api_key = os.environ["NYT_API_KEY"]
@@ -15,12 +15,19 @@ api_results = json.loads(res.text)
 
 docs = api_results['response']['docs']
 
+address = input("From email address: ")
+emailpw = getpass.getpass("Email password: ")
+
+# todo: use email address and pw to mail this thing
+
 for i in docs:
     obit_source = "The New York Times" # May be more sources in the future, for now just NYT.
     obit_headline = i['headline']['main']
     obit_date = datetime.strftime(datetime.strptime(i['pub_date'],"%Y-%m-%dT%H:%M:%SZ"),"%B %d, %Y") # Dates are annoying, right? This line converts NYT's ISO formatted pub_date to a human-readable format.
     dead_person = re.match("[^,]*",obit_headline).group() # guesses the name of the person by the headline up until the comma. Brittle, but matches NYT syntax without fail so far.
     obit_URL = i['web_url']
+
+    doc_request = "A copy of all documents or FBI files pertaining to {dead_person}, an obituary of whom was published in {obit_source} on {obit_date} under the headline \"{obit_headline}\" and can be found at {obit_URL}.".format(**locals())
 
     email_text = """
 FBI
@@ -33,7 +40,7 @@ To whom it may concern:
 
 This is a request under 5 U.S.C. § 552, the Freedom of Information Act. I hereby request the following records:
 
-A copy of all documents or FBI files pertaining to {dead_person}, an obituary of whom was published in {obit_source} on {obit_date} under the headline \"{obit_headline}\" and can be found at {obit_URL}.
+{doc_request}
 
 The requested documents will be made available to the general public, and this request is not being made for commercial purposes.
 
