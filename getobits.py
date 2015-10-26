@@ -1,4 +1,4 @@
-#! python3
+#!/usr/bin/env python3
 # Grabs the last 10 NYT obits and prepares the text of a FOIA request for
 # their FBI files, then sends that request to the FBI
 
@@ -23,7 +23,7 @@ emailpw = getpass.getpass("Email password: ")
 
 recipient_address = "fbi@example.com" # not the real address
 
-smtpObj = smtplib.SMTP('smtp.gmail.com',587)
+smtpObj = smtplib.SMTP('mail.gandi.net',587) # hardcoded for my settings, do not use
 smtpObj.ehlo()
 smtpObj.starttls()
 smtpObj.login(from_address, emailpw)
@@ -66,20 +66,25 @@ Thank you for your consideration in this matter. I look forward to receiving you
 
 Parker Higgins
 FOIA The Dead
-602 Van Ness Ave Suite""".format(**locals())
+602 Van Ness Ave Suite E731
+San Francisco, CA 94102""".format(**locals())
 
     print("Preparing to send an email from {from_address} with the following request:\n".format(**locals()))
 
     print(doc_request)
 
-    input("\nLook good? ")
+    bailout = input("\nLook good? (Y)es/(s)kip/(q)uit ")
 
-    encoded_msg = MIMEText(email_text, 'plain', 'utf-8')
-    encoded_msg['Subject'] = Header(email_subject, 'utf-8')
-    encoded_msg['From'] = from_address
-    encoded_msg['To'] = recipient_address
-
-    smtpObj.sendmail(from_address, recipient_address, encoded_msg.as_string())
-
-    smtpObj.quit()
+    if bailout == "" or bailout == "y":
+        encoded_msg = MIMEText(email_text, 'plain', 'utf-8')
+        encoded_msg['Subject'] = Header(email_subject, 'utf-8')
+        encoded_msg['From'] = from_address
+        encoded_msg['To'] = recipient_address
+        smtpObj.sendmail(from_address, [recipient_address,"BCC:myownemail@blahblahblah"], encoded_msg.as_string())
+    elif bailout == "s":
+        continue
+    elif bailout == "q":
+        break
+    
+smtpObj.quit()
 
