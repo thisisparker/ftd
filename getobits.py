@@ -7,8 +7,9 @@ from datetime import datetime
 from email.header import Header
 from email.mime.text import MIMEText
 
-nyt_api_key = os.environ["NYT_API_KEY"]
-# todo move to config
+config = yaml.load(open("config.yaml"))
+
+nyt_api_key = config['nyt_api_key']
 
 api_url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=type_of_material:%28%22Obituary%22%29&sort=newest&fl=headline,web_url,snippet,pub_date&api-key=" + nyt_api_key
 
@@ -19,17 +20,15 @@ api_results = json.loads(res.text)
 
 docs = api_results['response']['docs']
 
-from_address = input("From email address: ")
-emailpw = getpass.getpass("Email password: ")
+from_address = config['from_address']
+email_pw = config['email_pw']
 
-recipient_address = "fbi@example.com" # not the real address
-# todo, fill in from config
+recipient_address = config['recipient_address']
 
-smtpObj = smtplib.SMTP('mail.gandi.net',587) # hardcoded for my settings, do not use
-# todo, replace with config
+smtpObj = smtplib.SMTP(config['smtp_server'],587)
 smtpObj.ehlo()
 smtpObj.starttls()
-smtpObj.login(from_address, emailpw)
+smtpObj.login(from_address, email_pw)
 
 for i in docs:
     obit_source = "The New York Times" # May be more sources in the future, for now just NYT.
@@ -83,7 +82,7 @@ San Francisco, CA 94102""".format(**locals())
         encoded_msg['Subject'] = Header(email_subject, 'utf-8')
         encoded_msg['From'] = from_address
         encoded_msg['To'] = recipient_address
-        smtpObj.sendmail(from_address, [recipient_address,"BCC:address@example.com"], encoded_msg.as_string()) # todo: fill in address from config
+        smtpObj.sendmail(from_address, [recipient_address,config['bcc_address']], encoded_msg.as_string())
     elif bailout == "s":
         continue
     elif bailout == "q":
