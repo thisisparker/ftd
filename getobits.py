@@ -2,12 +2,13 @@
 # Grabs the last 10 NYT obits and prepares the text of a FOIA request for
 # their FBI files, then sends that request to the FBI
 
-import os, requests, json, datetime, re, getpass, smtplib
+import os, requests, json, datetime, re, getpass, smtplib, yaml
 from datetime import datetime
 from email.header import Header
 from email.mime.text import MIMEText
 
 nyt_api_key = os.environ["NYT_API_KEY"]
+# todo move to config
 
 api_url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=type_of_material:%28%22Obituary%22%29&sort=newest&fl=headline,web_url,snippet,pub_date&api-key=" + nyt_api_key
 
@@ -22,8 +23,10 @@ from_address = input("From email address: ")
 emailpw = getpass.getpass("Email password: ")
 
 recipient_address = "fbi@example.com" # not the real address
+# todo, fill in from config
 
 smtpObj = smtplib.SMTP('mail.gandi.net',587) # hardcoded for my settings, do not use
+# todo, replace with config
 smtpObj.ehlo()
 smtpObj.starttls()
 smtpObj.login(from_address, emailpw)
@@ -75,12 +78,12 @@ San Francisco, CA 94102""".format(**locals())
 
     bailout = input("\nLook good? (Y)es/(s)kip/(q)uit ")
 
-    if bailout == "" or bailout == "y":
+    if bailout == "" or bailout == "y" or bailout == "Y":
         encoded_msg = MIMEText(email_text, 'plain', 'utf-8')
         encoded_msg['Subject'] = Header(email_subject, 'utf-8')
         encoded_msg['From'] = from_address
         encoded_msg['To'] = recipient_address
-        smtpObj.sendmail(from_address, [recipient_address,"BCC:myownemail@blahblahblah"], encoded_msg.as_string())
+        smtpObj.sendmail(from_address, [recipient_address,"BCC:address@example.com"], encoded_msg.as_string()) # todo: fill in address from config
     elif bailout == "s":
         continue
     elif bailout == "q":
