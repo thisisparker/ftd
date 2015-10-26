@@ -56,7 +56,7 @@ This is a request under 5 U.S.C. § 552, the Freedom of Information Act. I hereb
 
 The requested documents will be made available to the general public, and this request is not being made for commercial purposes.
 
-The noncommercial organization with which I am affiliated, FOIA The Dead, gathers through the Freedom of Information Act information of interest to a segment of the general public and uses its editorial skills to turn those raw materials into distinct works. It distributes those works free of charge to the general public on its website, foiathedead.org. As such, I believe I qualify as a representative of the news media for the purposes of this request.
+FOIA The Dead is a noncommercial organization that uses Freedom of Information Act requests to gather information of interest to a segment of the general public, and uses its editorial skills to turn those raw materials into distinct works. It distributes those works free of charge to the general public on its website, foiathedead.org. As such, I believe I qualify as a representative of the news media for the purposes of this request.
 
 Additionally, because FOIA The Dead is a noncommercial organization, this request cannot be construed to be in its or my commercial interest. Finally, I believe that documents responsive to this request are likely to contribute significantly to public understanding of the operations or activities of the government by demonstrating how the FBI as a governmental agency collects, organizes, and stores information about the prominent individual in question.
 
