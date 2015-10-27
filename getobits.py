@@ -2,7 +2,7 @@
 # Grabs the last 10 NYT obits and prepares the text of a FOIA request for
 # their FBI files, then sends that request to the FBI
 
-import os, requests, json, datetime, re, getpass, smtplib, yaml
+import os, requests, json, datetime, re, getpass, smtplib, yaml, email.utils
 from datetime import datetime
 from email.header import Header
 from email.mime.text import MIMEText
@@ -20,9 +20,11 @@ api_results = json.loads(res.text)
 
 docs = api_results['response']['docs']
 
+from_name = config['from_name']
 from_address = config['from_address']
 email_pw = config['email_pw']
 
+recipient_name = config['recipient_name']
 recipient_address = config['recipient_address']
 
 smtpObj = smtplib.SMTP(config['smtp_server'],587)
@@ -78,11 +80,12 @@ San Francisco, CA 94102""".format(**locals())
     bailout = input("\nLook good? (Y)es/(s)kip/(q)uit ")
 
     if bailout == "" or bailout == "y" or bailout == "Y":
-        encoded_msg = MIMEText(email_text, 'plain', 'utf-8')
-        encoded_msg['Subject'] = Header(email_subject, 'utf-8')
-        encoded_msg['From'] = from_address
-        encoded_msg['To'] = recipient_address
-        smtpObj.sendmail(from_address, [recipient_address,config['bcc_address']], encoded_msg.as_string())
+        msg = MIMEText(email_text, 'plain', 'utf-8')
+        msg['To'] = email.utils.formataddr((recipient_name,recipient_address))
+        msg['From'] = email.utils.formataddr((from_name,from_address))
+        msg['Subject'] = Header(email_subject, 'utf-8')
+        
+        smtpObj.sendmail(from_address, [recipient_address,config['bcc_address']], msg.as_string())
     elif bailout == "s":
         continue
     elif bailout == "q":
