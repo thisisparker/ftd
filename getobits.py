@@ -23,6 +23,7 @@ docs = api_results['response']['docs']
 from_name = config['from_name']
 from_address = config['from_address']
 email_pw = config['email_pw']
+mailing_address = config['mailing_address']
 
 recipient_name = config['recipient_name']
 recipient_address = config['recipient_address']
@@ -70,8 +71,7 @@ Thank you for your consideration in this matter. I look forward to receiving you
 
 Parker Higgins
 FOIA The Dead
-602 Van Ness Ave Suite E731
-San Francisco, CA 94102""".format(**locals())
+{mailing_address}""".format(**locals())
 
     print("Preparing to send an email from {from_address} with the following request:\n".format(**locals()))
 
@@ -83,11 +83,12 @@ San Francisco, CA 94102""".format(**locals())
         msg = MIMEText(email_text, 'plain', 'utf-8')
         msg['To'] = email.utils.formataddr((recipient_name,recipient_address))
         msg['From'] = email.utils.formataddr((from_name,from_address))
-        msg['Subject'] = Header(email_subject, 'utf-8')
-        
+        msg['Subject'] = Header(email_subject, 'utf-8')        
         smtpObj.sendmail(from_address, [recipient_address,config['bcc_address']], msg.as_string())
+
     elif bailout == "s":
         continue
+
     elif bailout == "q":
         break
     
