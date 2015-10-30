@@ -3,6 +3,7 @@
 # their FBI files, then sends that request to the FBI
 
 import os, requests, json, datetime, re, getpass, smtplib, yaml, email.utils
+import ftd_tweets
 from datetime import datetime
 from email.header import Header
 from email.mime.text import MIMEText
@@ -85,6 +86,10 @@ FOIA The Dead
         msg['From'] = email.utils.formataddr((from_name,from_address))
         msg['Subject'] = Header(email_subject, 'utf-8')        
         smtpObj.sendmail(from_address, [recipient_address,config['bcc_address']], msg.as_string())
+
+        should_tweet = input("Tweet this request? Y/n ")
+        if should_tweet == "" or should_tweet == "Y":
+            ftd_tweets.tweet_request(dead_person,obit_URL)
 
     elif bailout == "s":
         continue
