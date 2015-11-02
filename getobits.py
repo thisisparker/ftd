@@ -90,7 +90,7 @@ FOIA The Dead
 
         should_tweet = input("Tweet this request? Y/n ")
         if should_tweet == "" or should_tweet == "Y":
-            ftd_tweets.tweet_request(dead_person,obit_description,obit_URL)
+            ftd_tweets.tweet_request(dead_person,obit_URL)
 
     elif bailout == "s":
         continue
