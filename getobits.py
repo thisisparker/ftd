@@ -40,9 +40,9 @@ for i in docs:
     obit_date = datetime.strftime(datetime.strptime(i['pub_date'],"%Y-%m-%dT%H:%M:%SZ"),"%B %d, %Y") # Dates are annoying, right? This line converts NYT's ISO formatted pub_date to a human-readable format.
     dead_person = obit_headline.split(",")[0] # guesses the name of the person by the headline up until the comma. Brittle, but matches NYT syntax mostly without fail so far.
     obit_description = obit_headline.split(", Dies")[0].split(dead_person + ", ")[1]
-    obit_URL = i['web_url']
+    obit_url = i['web_url']
 
-    doc_request = "A copy of all documents or FBI files pertaining to {dead_person}, an obituary of whom was published in {obit_source} on {obit_date} under the headline \"{obit_headline}\" and can be found at {obit_URL}.".format(**locals())
+    doc_request = "A copy of all documents or FBI files pertaining to {dead_person}, an obituary of whom was published in {obit_source} on {obit_date} under the headline \"{obit_headline}\" and can be found at {obit_url}.".format(**locals())
 
     email_subject = "FOIA Request, " + dead_person
 
@@ -90,7 +90,7 @@ FOIA The Dead
 
         should_tweet = input("Tweet this request? Y/n ")
         if should_tweet == "" or should_tweet == "Y":
-            ftd_tweets.tweet_request(dead_person,obit_URL)
+            ftd_tweets.tweet_request(dead_person,obit_url)
 
     elif bailout == "s":
         continue
