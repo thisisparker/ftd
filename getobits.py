@@ -2,13 +2,16 @@
 # Grabs the last 10 NYT obits and prepares the text of a FOIA request for
 # their FBI files, then sends that request to the FBI
 
-import os, requests, json, datetime, getpass, smtplib, yaml, email.utils
+import os, requests, json, datetime, getpass, smtplib, yaml, email.utils, sqlite3
 import ftd_tweets
 from datetime import datetime
 from email.header import Header
 from email.mime.text import MIMEText
 
 config = yaml.load(open("config.yaml"))
+
+db = config['db']
+conn = sqlite3.connect(db)
 
 nyt_api_key = config['nyt_api_key']
 
@@ -88,6 +91,15 @@ FOIA The Dead
         msg['Subject'] = Header(email_subject, 'utf-8')        
         smtpObj.sendmail(from_address, [recipient_address,config['bcc_address']], msg.as_string())
 
+        now_string = str(datetime.utcnow())
+
+        conn.execute("""
+        insert into requests (name, obit_headline, obit_url, requested_at)
+        values ('{dead_person}','{obit_headline}','{obit_url}','{now_string}')
+        """.format(**locals()))
+
+        conn.commit()
+
         should_tweet = input("Tweet this request? Y/n ")
         if should_tweet == "" or should_tweet == "Y":
             ftd_tweets.tweet_request(dead_person,obit_url)
@@ -100,3 +112,4 @@ FOIA The Dead
     
 smtpObj.quit()
 
+conn.close()
