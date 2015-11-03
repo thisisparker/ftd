@@ -2,13 +2,16 @@
 # Grabs the last 10 NYT obits and prepares the text of a FOIA request for
 # their FBI files, then sends that request to the FBI
 
-import os, requests, json, datetime, getpass, smtplib, yaml, email.utils
+import os, requests, json, datetime, getpass, smtplib, yaml, email.utils, sqlite3
 import ftd_tweets
 from datetime import datetime
 from email.header import Header
 from email.mime.text import MIMEText
 
 config = yaml.load(open("config.yaml"))
+
+db = config['db']
+conn = sqlite3.connect(db)
 
 nyt_api_key = config['nyt_api_key']
 
@@ -40,9 +43,9 @@ for i in docs:
     obit_date = datetime.strftime(datetime.strptime(i['pub_date'],"%Y-%m-%dT%H:%M:%SZ"),"%B %d, %Y") # Dates are annoying, right? This line converts NYT's ISO formatted pub_date to a human-readable format.
     dead_person = obit_headline.split(",")[0] # guesses the name of the person by the headline up until the comma. Brittle, but matches NYT syntax mostly without fail so far.
     obit_description = obit_headline.split(", Dies")[0].split(dead_person + ", ")[1]
-    obit_URL = i['web_url']
+    obit_url = i['web_url']
 
-    doc_request = "A copy of all documents or FBI files pertaining to {dead_person}, an obituary of whom was published in {obit_source} on {obit_date} under the headline \"{obit_headline}\" and can be found at {obit_URL}.".format(**locals())
+    doc_request = "A copy of all documents or FBI files pertaining to {dead_person}, an obituary of whom was published in {obit_source} on {obit_date} under the headline \"{obit_headline}\" and can be found at {obit_url}.".format(**locals())
 
     email_subject = "FOIA Request, " + dead_person
 
@@ -88,9 +91,18 @@ FOIA The Dead
         msg['Subject'] = Header(email_subject, 'utf-8')        
         smtpObj.sendmail(from_address, [recipient_address,config['bcc_address']], msg.as_string())
 
+        now_string = str(datetime.utcnow())
+
+        conn.execute("""
+        insert into requests (name, obit_headline, obit_url, requested_at)
+        values ('{dead_person}','{obit_headline}','{obit_url}','{now_string}')
+        """.format(**locals()))
+
+        conn.commit()
+
         should_tweet = input("Tweet this request? Y/n ")
         if should_tweet == "" or should_tweet == "Y":
-            ftd_tweets.tweet_request(dead_person,obit_URL)
+            ftd_tweets.tweet_request(dead_person,obit_url)
 
     elif bailout == "s":
         continue
@@ -100,3 +112,4 @@ FOIA The Dead
     
 smtpObj.quit()
 
+conn.close()
