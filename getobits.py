@@ -52,7 +52,7 @@ for i in docs:
     obit_url = i['web_url']
     obit_pdf_filename = dead_person.lower().replace(" ","-") + "-nyt-obit.pdf"
 
-    doc_request = "A copy of all documents or FBI files pertaining to {dead_person}, an obituary of whom was published in {obit_source} on {obit_date} under the headline \"{obit_headline}\". Please see attached PDF for a copy of that obituary.".format(**locals())
+    doc_request = "A copy of all documents or FBI files pertaining to {dead_person}, an obituary of whom was published in {obit_source} on {obit_date} under the headline \"{obit_headline}\". Please see attached PDF copy of that obituary, which may also be found at {obit_url}.".format(**locals())
 
     email_subject = "FOIA Request, " + dead_person
 
@@ -125,7 +125,7 @@ FOIA The Dead
 
         conn.commit()
 
-        should_tweet = input("Tweet this request? Y/n ")
+        should_tweet = input("\nTweet this request? Y/n ")
         if should_tweet == "" or should_tweet == "Y":
             ftd_tweets.tweet_request(dead_person,obit_url)
 
