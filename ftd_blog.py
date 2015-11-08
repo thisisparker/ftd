@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # New blog posts from the FOIA The Dead Script.
-# Up first: just a digest of new requests.
+# Currently posts digests of recent FOIA requests, with more blog types to come.
 
 import yaml, sqlite3
 from datetime import datetime
 from wordpress_xmlrpc import Client, WordPressPost
-from wordpress_xmlrpc.methods.posts import NewPost
+from wordpress_xmlrpc.methods.posts import NewPost, GetPost
 
 config = yaml.load(open("config.yaml"))
 
@@ -25,32 +25,44 @@ def requests_digest():
 
     c = conn.cursor()
     
-    c.execute('select name, obit_headline, obit_url, requested_at from requests where request_blogged_at is null')
+    c.execute('select id, name, obit_headline, obit_url, requested_at from requests where request_blogged_at is null')
     unblogged = c.fetchall()
-
-    post_content = """We've recently requested the FBI files of the following individuals:
-
-    <ul>"""
-
-    for entry in unblogged:
-        name = entry[0]
-        obit_headline = entry[1]
-        obit_url = entry[2]
-        
-        post_content += "\n<li>{name} (<a href=\"{obit_url}\">New York Times obit</a>)</li>".format(**locals())
 
     post = WordPressPost()
     today = datetime.strftime(datetime.today(),'%B %-d, %Y')
     post.title = 'New requests for FBI files, ' + today    
-    post.content = post_content
 
     post.terms_names = {
-        'category':['Requests']
+        'category':['Requests'],
+        'post_tag':[]
     }
-    
-    wp.call(NewPost(post))
 
-    #todo update the db with request_blogged_at and request_blog_url values
+    post.content = """We've recently requested the FBI files of the following individuals:
+
+    <ul>"""
+    
+
+    for entry in unblogged:        
+        name = entry[1]
+        obit_headline = entry[2]
+        obit_url = entry[3]
+        
+        post.content += "\n<li>{name} (<a href=\"{obit_url}\">New York Times obit</a>)</li>".format(**locals())
+        post.terms_names['post_tag'].append(name.lower())
+
+    post.post_status = 'publish'
+    
+    post_id = wp.call(NewPost(post))
+    
+    post_url = wp.call(GetPost(post_id)).link
+    post_date = str(wp.call(GetPost(post_id)).date)    
+
+    for entry in unblogged:
+        entry_id = entry[0]
+        c.execute('update requests set request_blogged_at = ?, request_blog_url = ? where id = ?',(post_date,post_url,entry_id))
+
+    conn.commit()
+    conn.close()
 
 if __name__ == "__main__":
     main()
