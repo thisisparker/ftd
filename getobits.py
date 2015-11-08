@@ -45,7 +45,7 @@ server.login(from_address, email_pw)
 for i in docs:
     obit_source = "The New York Times" # May be more sources in the future, for now just NYT.
     obit_headline = html.unescape(i['headline']['main'])
-    obit_date = datetime.strftime(datetime.strptime(i['pub_date'],"%Y-%m-%dT%H:%M:%SZ"),"%B %d, %Y") # Dates are annoying, right? This line converts NYT's ISO formatted pub_date to a human-readable format.
+    obit_date = datetime.strftime(datetime.strptime(i['pub_date'],"%Y-%m-%dT%H:%M:%SZ"),"%B %-d, %Y") # Dates are annoying, right? This line converts NYT's ISO formatted pub_date to a human-readable format.
     dead_person = obit_headline.split(",")[0] # guesses the name of the person by the headline up until the comma. Brittle, but matches NYT syntax mostly without fail so far.
 #   Removed the following line because it doesn't do well with non-standard headlines. Might try to figure out how to get it back in.
 #   obit_description = obit_headline.split(", Dies")[0].split(dead_person + ", ")[1] 
