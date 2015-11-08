@@ -2,7 +2,7 @@
 # New blog posts from the FOIA The Dead Script.
 # Currently posts digests of recent FOIA requests, with more blog types to come.
 
-import yaml, sqlite3
+import yaml, sqlite3, ftd_tweets
 from datetime import datetime
 from wordpress_xmlrpc import Client, WordPressPost
 from wordpress_xmlrpc.methods.posts import NewPost, GetPost
@@ -54,8 +54,9 @@ def requests_digest():
     
     post_id = wp.call(NewPost(post))
     
-    post_url = wp.call(GetPost(post_id)).link
-    post_date = str(wp.call(GetPost(post_id)).date)    
+    post_url = wp.call(GetPost(post_id)).link.replace('http','https')
+    post_date = str(wp.call(GetPost(post_id)).date)
+    post_title = wp.call(GetPost(post_id)).title
 
     for entry in unblogged:
         entry_id = entry[0]
@@ -63,6 +64,8 @@ def requests_digest():
 
     conn.commit()
     conn.close()
+
+    ftd_tweets.tweet_digest_post(post_title,post_url)
 
 if __name__ == "__main__":
     main()

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-# Tweets from the FOIA The Dead script. Currently only new requests, may expand later.
+# Tweets from the FOIA The Dead script.
+# Tweets a subset of new requests, and blog post updates with digests.
 
 import yaml
 from twython import Twython
@@ -16,3 +17,6 @@ twitter = Twython(twitter_app_key, twitter_app_secret, twitter_oauth_token, twit
 
 def tweet_request(name,obit_url):
     twitter.update_status(status='Just filed a FOIA request for the FBI file of {name}. NY Times obituary: {obit_url}'.format(**locals()))
+
+def tweet_digest_post(post_title,post_url)
+    twitter.update_status(status='Blog post: {post_title} {post_url}'.format(**locals()))
