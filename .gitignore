@@ -1,3 +1,5 @@
 config.yaml
 *.db
 *.pdf
+*~
+__pycache__/*
