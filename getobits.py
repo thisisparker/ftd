@@ -42,19 +42,61 @@ server.ehlo()
 server.starttls()
 server.login(from_address, email_pw)
 
-for i in docs:
+to_send = []
+
+for obit in docs:
     obit_source = "The New York Times" # May be more sources in the future, for now just NYT.
-    obit_headline = html.unescape(i['headline']['main'])
-    obit_date = datetime.strftime(datetime.strptime(i['pub_date'],"%Y-%m-%dT%H:%M:%SZ"),"%B %-d, %Y") # Dates are annoying, right? This line converts NYT's ISO formatted pub_date to a human-readable format.
-    dead_person = obit_headline.split(",")[0] # guesses the name of the person by the headline up until the comma. Brittle, but matches NYT syntax mostly without fail so far.
-#   Removed the following line because it doesn't do well with non-standard headlines. Might try to figure out how to get it back in.
-#   obit_description = obit_headline.split(", Dies")[0].split(dead_person + ", ")[1] 
-    obit_url = i['web_url']
-    obit_pdf_filename = dead_person.lower().replace(" ","-") + "-nyt-obit.pdf"
+    obit_headline = html.unescape(obit['headline']['main'])
+
+    # Dates are annoying, right? This line converts NYT's ISO formatted pub_date to a human-readable format.
+    obit_date = datetime.strftime(datetime.strptime(obit['pub_date'],"%Y-%m-%dT%H:%M:%SZ"),"%B %-d, %Y") 
+
+    # guesses the name of the person by the headline up until the comma. 
+    # Brittle, but matches NYT syntax mostly without fail so far.
+    dead_person = obit_headline.split(",")[0] 
+
+    obit_url = obit['web_url']
+    # Removed the following line because it doesn't do well with non-standard headlines. 
+    # Might try to figure out how to get it back in.
+    # obit_description = obit_headline.split(", Dies")[0].split(dead_person + ", ")[1] 
 
     doc_request = "A copy of all documents or FBI files pertaining to {dead_person}, an obituary of whom was published in {obit_source} on {obit_date} under the headline \"{obit_headline}\". Please see attached PDF copy of that obituary, which may also be found at {obit_url}.".format(**locals())
 
-    email_subject = "FOIA Request, " + dead_person
+    print("\nPreparing an email from {from_address} with the following request:\n".format(**locals()))
+
+    print(doc_request)
+
+    should_request = input("\nLook good? (Y)es/(s)kip/(q)uit ")
+
+    if should_request == "" or should_request == "y" or should_request == "Y":
+
+        to_send.append([dead_person,doc_request,obit_url])
+
+        now_string = str(datetime.utcnow())
+
+        conn.execute("""
+        insert into requests (name, obit_headline, obit_url, requested_at)
+        values ('{dead_person}','{obit_headline}','{obit_url}','{now_string}')
+        """.format(**locals()))
+
+        conn.commit()
+
+        should_tweet = input("\nTweet this request? Y/n ")
+
+        if should_tweet == "" or should_tweet == "Y":
+            ftd_tweets.tweet_request(dead_person,obit_url)
+
+    elif should_request == "s":
+        continue
+
+    elif should_request == "q":
+        break
+
+for request in to_send:
+
+    req_name = request[0]
+    req_request = request[1]
+    req_url = request[2]
 
     email_text = """
 FBI
@@ -67,7 +109,7 @@ To whom it may concern:
 
 This is a request under 5 U.S.C. § 552, the Freedom of Information Act. I hereby request the following records:
 
-{doc_request}
+{req_request}
 
 The requested documents will be made available to the general public, and this request is not being made for commercial purposes.
 
@@ -85,56 +127,34 @@ Parker Higgins
 FOIA The Dead
 {mailing_address}""".format(**locals())
 
-    print("\nPreparing to send an email from {from_address} with the following request:\n".format(**locals()))
+    print("\nHandcrafting a PDF of the obituary of {req_name}.".format(**locals()))
 
-    print(doc_request)
+    req_pdf_filename = req_name.lower().replace(" ","-") + "-nyt-obit.pdf"
+    pdfkit.from_url(req_url, "pdfs/" + req_pdf_filename,options={'quiet':''})
 
-    should_request = input("\nLook good? (Y)es/(s)kip/(q)uit ")
+    print("\nSending FOIA request for {req_name} file via email.".format(**locals()))
 
-    if should_request == "" or should_request == "y" or should_request == "Y":
+    email_subject = "FOIA Request, " + req_name
 
-        print("\nMaking PDF to send as an attachment.")
+    msg = MIMEMultipart()
+    msg['Subject'] = Header(email_subject, 'utf-8')
+    msg['From'] = email.utils.formataddr((from_name,from_address))
+    msg['To'] = email.utils.formataddr((recipient_name,recipient_address))
 
-        pdfkit.from_url(obit_url, "pdfs/" + obit_pdf_filename,options={'quiet':''})
+    msg.attach(MIMEText(email_text, 'plain', 'utf-8'))
 
-        print("\nPreparing to send FOIA request via email.")
+    attachment = MIMEBase('application', "octet-stream", name=req_pdf_filename)
+    attachment.set_payload(open("pdfs/" + req_pdf_filename,"rb").read())
+    encoders.encode_base64(attachment)
 
-        msg = MIMEMultipart()
-        msg['Subject'] = Header(email_subject, 'utf-8')
-        msg['From'] = email.utils.formataddr((from_name,from_address))
-        msg['To'] = email.utils.formataddr((recipient_name,recipient_address))
+    attachment.add_header('Content_Disposition','attachment',filename=req_pdf_filename)
 
-        msg.attach(MIMEText(email_text, 'plain', 'utf-8'))
+    msg.attach(attachment)
 
-        attachment = MIMEBase('application', "octet-stream", name=obit_pdf_filename)
-        attachment.set_payload(open("pdfs/"+obit_pdf_filename,"rb").read())
-        encoders.encode_base64(attachment)
-
-        attachment.add_header('Content_Disposition','attachment',filename=obit_pdf_filename)
-
-        msg.attach(attachment)
-
-        server.sendmail(from_address, [recipient_address,config['bcc_address']], msg.as_string())
-
-        now_string = str(datetime.utcnow())
-
-        conn.execute("""
-        insert into requests (name, obit_headline, obit_url, requested_at)
-        values ('{dead_person}','{obit_headline}','{obit_url}','{now_string}')
-        """.format(**locals()))
-
-        conn.commit()
-
-        should_tweet = input("\nTweet this request? Y/n ")
-        if should_tweet == "" or should_tweet == "Y":
-            ftd_tweets.tweet_request(dead_person,obit_url)
-
-    elif should_request == "s":
-        continue
-
-    elif should_request == "q":
-        break
+    server.sendmail(from_address, [recipient_address,config['bcc_address']], msg.as_string())
     
 server.quit()
 
 conn.close()
+
+print("\nAll done. Pleasure doing business with you.")
