@@ -79,8 +79,6 @@ for obit in docs:
         values ('{dead_person}','{obit_headline}','{obit_url}','{now_string}')
         """.format(**locals()))
 
-        conn.commit()
-
         should_tweet = input("\nTweet this request? Y/n ")
 
         if should_tweet == "" or should_tweet == "Y":
@@ -155,6 +153,7 @@ FOIA The Dead
     
 server.quit()
 
+conn.commit()
 conn.close()
 
 print("\nAll done. Pleasure doing business with you.")
