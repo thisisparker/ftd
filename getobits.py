@@ -2,7 +2,7 @@
 # Grabs the last 10 NYT obits and prepares the text of a FOIA request for
 # their FBI files, then sends that request to the FBI
 
-import os, requests, json, datetime, getpass, smtplib, email.utils, sqlite3
+import os, requests, json, datetime, smtplib, email.utils, sqlite3
 import yaml, pdfkit, html
 import ftd_tweets
 from datetime import datetime
