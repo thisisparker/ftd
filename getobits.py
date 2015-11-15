@@ -18,6 +18,12 @@ config = yaml.load(open("config.yaml"))
 db = config['db']
 conn = sqlite3.connect(db)
 
+# Note: as the db gets bigger, this should take a slice.
+# For now, it's fine and fast enough to just check against all past requests.
+
+recent_requests_tuples = list(conn.execute('select name from requests order by id desc'))
+recent_requests = [entry[0] for entry in recent_requests_tuples]
+
 nyt_api_key = config['nyt_api_key']
 
 api_url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=type_of_material:%28%22Obituary%22%29&sort=newest&fl=headline,web_url,snippet,pub_date&api-key=" + nyt_api_key
@@ -48,7 +54,7 @@ for obit in docs:
     obit_source = "The New York Times" # May be more sources in the future, for now just NYT.
     obit_headline = html.unescape(obit['headline']['main'])
 
-    # Dates are annoying, right? This line converts NYT's ISO formatted pub_date to a human-readable format.
+    # This line converts NYT's ISO formatted pub_date to a human-readable format.
     obit_date = datetime.strftime(datetime.strptime(obit['pub_date'],"%Y-%m-%dT%H:%M:%SZ"),"%B %-d, %Y") 
 
     # guesses the name of the person by the headline up until the comma. 
@@ -65,6 +71,9 @@ for obit in docs:
     print("\nPreparing an email from {from_address} with the following request:\n".format(**locals()))
 
     print(doc_request)
+
+    if dead_person in recent_requests:
+        print("\nBut it looks like you've already sent a request for {dead_person}.".format(**locals()))
 
     should_request = input("\nLook good? (Y)es/(s)kip/(q)uit ")
 
