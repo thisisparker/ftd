@@ -43,7 +43,7 @@ mailing_address = config['mailing_address']
 recipient_name = config['recipient_name']
 recipient_address = config['recipient_address']
 
-server = smtplib.SMTP(config['smtp_server'],587)
+server = smtplib.SMTP(config['smtp_server'],587,timeout=120)
 server.ehlo()
 server.starttls()
 server.login(from_address, email_pw)
