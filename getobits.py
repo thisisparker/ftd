@@ -44,9 +44,6 @@ recipient_name = config['recipient_name']
 recipient_address = config['recipient_address']
 
 server = smtplib.SMTP(config['smtp_server'],587,timeout=120)
-server.ehlo()
-server.starttls()
-server.login(from_address, email_pw)
 
 to_send = []
 
@@ -98,6 +95,10 @@ for obit in docs:
 
     elif should_request == "q":
         break
+
+server.ehlo()
+server.starttls()
+server.login(from_address, email_pw)
 
 for request in to_send:
 
