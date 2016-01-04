@@ -76,14 +76,9 @@ for obit in docs:
 
     if should_request == "" or should_request == "y" or should_request == "Y":
 
-        to_send.append([dead_person,doc_request,obit_url])
-
         now_string = str(datetime.utcnow())
 
-        conn.execute("""
-        insert into requests (name, obit_headline, obit_url, requested_at)
-        values ('{dead_person}','{obit_headline}','{obit_url}','{now_string}')
-        """.format(**locals()))
+        to_send.append([dead_person,doc_request,obit_url,obit_headline,now_string])
 
         should_tweet = input("\nTweet this request? Y/n ")
 
@@ -105,6 +100,8 @@ for request in to_send:
     req_name = request[0]
     req_request = request[1]
     req_url = request[2]
+    req_headline = request[3]
+    req_time = request[4]
 
     email_text = """
 FBI
@@ -160,10 +157,16 @@ FOIA The Dead
     msg.attach(attachment)
 
     server.sendmail(from_address, [recipient_address,config['bcc_address']], msg.as_string())
+
+    conn.execute("""
+    insert into requests (name, obit_headline, obit_url, requested_at)
+    values ('{req_name}','{req_headline}','{req_url}','{req_time}')
+    """.format(**locals()))
+
+    conn.commit()
     
 server.quit()
 
-conn.commit()
 conn.close()
 
 print("\nAll done. Pleasure doing business with you.")
