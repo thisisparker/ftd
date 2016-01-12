@@ -91,9 +91,10 @@ for obit in docs:
     elif should_request == "q":
         break
 
-server.ehlo()
-server.starttls()
-server.login(from_address, email_pw)
+if to_send:
+    server.starttls()
+    server.ehlo()
+    server.login(from_address, email_pw)
 
 for request in to_send:
 
