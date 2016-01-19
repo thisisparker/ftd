@@ -80,10 +80,12 @@ for obit in docs:
 
         to_send.append([dead_person,doc_request,obit_url,obit_headline,now_string])
 
-        should_tweet = input("\nTweet this request? Y/n ")
+# Below section would tweet, but holding off for now.
 
-        if should_tweet == "" or should_tweet == "Y":
-            ftd_tweets.tweet_request(dead_person,obit_url)
+#        should_tweet = input("\nTweet this request? Y/n ")
+#
+#        if should_tweet == "" or should_tweet == "Y":
+#            ftd_tweets.tweet_request(dead_person,obit_url)
 
     elif should_request == "s":
         continue
