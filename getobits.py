@@ -138,7 +138,14 @@ FOIA The Dead
     print("\nHandcrafting a PDF of the obituary of {req_name}.".format(**locals()))
 
     req_pdf_filename = req_name.lower().replace(" ","-") + "-nyt-obit.pdf"
-    pdfkit.from_url(req_url, "pdfs/" + req_pdf_filename,options={'quiet':''})
+    try:
+        pdfkit.from_url(req_url, "pdfs/" + req_pdf_filename,options={'quiet':''})
+    except OSError as error:
+        if "code 1" in str(error):
+            print("\nAn OSError occurred, but it's probably not a big deal.")
+        else:
+            print("\n!!! NOT SENDING a request for {req_name}, due to this error:\n {error}".format(**locals()))
+            continue
 
     print("\nSending FOIA request for {req_name} file via email.".format(**locals()))
 
