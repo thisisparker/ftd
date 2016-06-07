@@ -47,6 +47,15 @@ server = smtplib.SMTP(config['smtp_server'],587,timeout=120)
 
 to_send = []
 
+def editname(headline):
+    name_check = "n"
+    while name_check == "n":
+        print("\nOK, you can edit the name. Here's what the headline says:\n".format(**locals()))
+        print("{headline}\n".format(**locals()))
+        new_name = input("What's the name? ")
+        name_check = input("\nRoger that. Does {new_name} look good? (Y/n) ".format(**locals()))
+    return new_name
+
 for obit in docs:
     obit_source = "The New York Times" # May be more sources in the future, for now just NYT.
     obit_headline = html.unescape(obit['headline']['main'])
@@ -72,7 +81,7 @@ for obit in docs:
     if dead_person in recent_requests:
         print("\nBut it looks like you've already sent a request for {dead_person}.".format(**locals()))
 
-    should_request = input("\nLook good? (Y)es/(s)kip/(q)uit ")
+    should_request = input("\nLook good? (Y)es/(e)dit/(s)kip/(q)uit ")
 
     if should_request == "" or should_request == "y" or should_request == "Y":
 
@@ -86,6 +95,12 @@ for obit in docs:
 #
 #        if should_tweet == "" or should_tweet == "Y":
 #            ftd_tweets.tweet_request(dead_person,obit_url)
+
+    elif should_request == "e":
+        new_name = editname(obit_headline)
+        doc_request = "A copy of all documents or FBI files pertaining to {new_name}, an obituary of whom was published in {obit_source} on {obit_date} under the headline \"{obit_headline}\". Please see attached PDF copy of that obituary, which may also be found at {obit_url}.".format(**locals())
+        now_string = str(datetime.utcnow())
+        to_send.append([new_name,doc_request,obit_url,obit_headline,now_string])
 
     elif should_request == "s":
         continue
@@ -167,6 +182,7 @@ FOIA The Dead
     msg.attach(attachment)
 
     server.sendmail(from_address, [recipient_address,config['bcc_address']], msg.as_string())
+
 
     conn.execute("""
     insert into requests (name, obit_headline, obit_url, requested_at)
