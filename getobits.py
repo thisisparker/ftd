@@ -136,6 +136,8 @@ This is a request under 5 U.S.C. § 552, the Freedom of Information Act. I hereb
 
 The requested documents will be made available to the general public, and this request is not being made for commercial purposes.
 
+FOIA has always presumed that government records are open to public inspection, and the FOIA Improvement Act of 2016, Pub. L. 114-185, prohibits agencies from withholding records unless (1) "disclosure is prohibited by law" or (2) "the agency reasonably foresees that disclosure would harm an interest protected by" one of FOIA's exemptions. Id., §2, codified at 5 U.S.C. § 552(a)(8)(A). Thus, in addition to FOIA favoring disclosure and requiring its exemptions to be narrowly construed, Section 552(a)(8)(A) prohibits agencies from using their discretion to broadly withhold records merely because they believe an exemption could technically apply.
+
 FOIA The Dead is a noncommercial organization that uses Freedom of Information Act requests to gather information of interest to a segment of the general public, and uses its editorial skills to turn those raw materials into distinct works. It distributes those works free of charge to the general public on its website, foiathedead.org. As such, I believe I qualify as a representative of the news media for the purposes of this request.
 
 Additionally, because FOIA The Dead is a noncommercial organization, this request cannot be construed to be in its or my commercial interest. Finally, I believe that documents responsive to this request are likely to contribute significantly to public understanding of the operations or activities of the government by demonstrating how the FBI as a governmental agency collects, organizes, and stores information about the prominent individual in question.
