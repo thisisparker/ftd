@@ -21,8 +21,8 @@ conn = sqlite3.connect(db)
 # Note: as the db gets bigger, this should take a slice.
 # For now, it's fine and fast enough to just check against all past requests.
 
-recent_requests_tuples = list(conn.execute('select obit_headline from requests order by id desc'))
-recent_requests = [entry[0] for entry in recent_requests_tuples]
+recent_requests_tuples = list(conn.execute('select name,obit_headline from requests order by id desc'))
+recent_requests_names, recent_requests_headlines = map(list, zip(*recent_requests_tuples))
 
 nyt_api_key = config['nyt_api_key']
 
@@ -78,7 +78,9 @@ for obit in docs:
 
     print(doc_request)
 
-    if obit_headline in recent_requests:
+    if dead_person in recent_requests_names:
+        print("\nBut it looks like you've already sent a request for {dead_person}.".format(**locals()))
+    elif obit_headline in recent_requests_headlines:
         print("\nBut it looks like you've already sent a request for the obit \"{obit_headline}\".".format(**locals()))
 
     should_request = input("\nLook good? (Y)es/(e)dit/(s)kip/(q)uit ")
