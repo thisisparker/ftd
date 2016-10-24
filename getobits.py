@@ -114,15 +114,15 @@ if to_send:
     server.ehlo()
     server.login(from_address, email_pw)
 
-for request in to_send:
+    for request in to_send:
 
-    req_name = request[0]
-    req_request = request[1]
-    req_url = request[2]
-    req_headline = request[3]
-    req_time = request[4]
+        req_name = request[0]
+        req_request = request[1]
+        req_url = request[2]
+        req_headline = request[3]
+        req_time = request[4]
 
-    email_text = """
+        email_text = """
 FBI
 Record/Information Dissemination Section
 Attn: FOI/PA Request
@@ -153,47 +153,47 @@ Parker Higgins
 FOIA The Dead
 {mailing_address}""".format(**locals())
 
-    print("\nHandcrafting a PDF of the obituary of {req_name}.".format(**locals()))
+        print("\nHandcrafting a PDF of the obituary of {req_name}.".format(**locals()))
 
-    req_pdf_filename = req_name.lower().replace(" ","-") + "-nyt-obit.pdf"
-    try:
-        pdfkit.from_url(req_url, "pdfs/" + req_pdf_filename,options={'quiet':''})
-    except OSError as error:
-        if "code 1" in str(error):
-            print("\nAn OSError occurred, but it's probably not a big deal.")
-        else:
-            print("\n!!! NOT SENDING a request for {req_name}, due to this error:\n {error}".format(**locals()))
-            continue
+        req_pdf_filename = req_name.lower().replace(" ","-") + "-nyt-obit.pdf"
+        try:
+            pdfkit.from_url(req_url, "pdfs/" + req_pdf_filename,options={'quiet':''})
+        except OSError as error:
+            if "code 1" in str(error):
+                print("\nAn OSError occurred, but it's probably not a big deal.")
+            else:
+                print("\n!!! NOT SENDING a request for {req_name}, due to this error:\n {error}".format(**locals()))
+                continue
 
-    print("\nSending FOIA request for {req_name} file via email.".format(**locals()))
+        print("\nSending FOIA request for {req_name} file via email.".format(**locals()))
 
-    email_subject = "FOIA Request, " + req_name
+        email_subject = "FOIA Request, " + req_name
 
-    msg = MIMEMultipart()
-    msg['Subject'] = Header(email_subject, 'utf-8')
-    msg['From'] = email.utils.formataddr((from_name,from_address))
-    msg['To'] = email.utils.formataddr((recipient_name,recipient_address))
+        msg = MIMEMultipart()
+        msg['Subject'] = Header(email_subject, 'utf-8')
+        msg['From'] = email.utils.formataddr((from_name,from_address))
+        msg['To'] = email.utils.formataddr((recipient_name,recipient_address))
 
-    msg.attach(MIMEText(email_text, 'plain', 'utf-8'))
+        msg.attach(MIMEText(email_text, 'plain', 'utf-8'))
 
-    attachment = MIMEBase('application', "octet-stream", name=req_pdf_filename)
-    attachment.set_payload(open("pdfs/" + req_pdf_filename,"rb").read())
-    encoders.encode_base64(attachment)
+        attachment = MIMEBase('application', "octet-stream", name=req_pdf_filename)
+        attachment.set_payload(open("pdfs/" + req_pdf_filename,"rb").read())
+        encoders.encode_base64(attachment)
 
-    attachment.add_header('Content_Disposition','attachment',filename=req_pdf_filename)
+        attachment.add_header('Content_Disposition','attachment',filename=req_pdf_filename)
 
-    msg.attach(attachment)
+        msg.attach(attachment)
 
-    server.sendmail(from_address, [recipient_address,config['bcc_address']], msg.as_string())
+        server.sendmail(from_address, [recipient_address,config['bcc_address']], msg.as_string())
 
-    conn.execute("""
+        conn.execute("""
     insert into requests (name, obit_headline, obit_url, requested_at)
     values ('{req_name}','{req_headline}','{req_url}','{req_time}')
     """.format(**locals()))
 
-    conn.commit()
+        conn.commit()
     
-server.quit()
+    server.quit()
 
 conn.close()
 
