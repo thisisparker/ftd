@@ -59,7 +59,7 @@ for obit in docs:
     obit_headline = html.unescape(obit['headline']['main'])
 
     # This line converts NYT's ISO formatted pub_date to a human-readable format.
-    obit_date = datetime.strftime(datetime.strptime(obit['pub_date'],"%Y-%m-%dT%H:%M:%SZ"),"%B %-d, %Y") 
+    obit_date = datetime.strftime(datetime.strptime(obit['pub_date'],"%Y-%m-%dT%H:%M:%S%z"),"%B %-d, %Y") 
 
     # guesses the name of the person by the headline up until the comma. 
     # Brittle, but matches NYT syntax mostly without fail so far.
