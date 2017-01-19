@@ -59,7 +59,8 @@ for obit in docs:
     obit_headline = html.unescape(obit['headline']['main'])
 
     # This line converts NYT's ISO formatted pub_date to a human-readable format.
-    obit_date = datetime.strftime(datetime.strptime(obit['pub_date'],"%Y-%m-%dT%H:%M:%S%z"),"%B %-d, %Y") 
+    obit_date = datetime.strftime(datetime.strptime(obit['pub_date'],"%Y-%m-%dT%H:%M:%S%z"),"%B %-d, %Y")
+    pdf_date = datetime.strftime(datetime.strptime(obit['pub_date'],"%Y-%m-%dT%H:%M:%S%z"),"%Y%m%d")
 
     # guesses the name of the person by the headline up until the comma. 
     # Brittle, but matches NYT syntax mostly without fail so far.
@@ -87,7 +88,7 @@ for obit in docs:
 
         now_string = str(datetime.utcnow())
 
-        to_send.append([dead_person,doc_request,obit_url,obit_headline,now_string])
+        to_send.append([dead_person,doc_request,obit_url,obit_headline,now_string,pdf_date])
 
 # Below section would tweet, but holding off for now.
 
@@ -100,7 +101,7 @@ for obit in docs:
         new_name = editname(obit_headline)
         doc_request = "A copy of all documents or FBI files pertaining to {new_name}, an obituary of whom was published in {obit_source} on {obit_date} under the headline \"{obit_headline}\". Please see attached PDF copy of that obituary, which may also be found at {obit_url}.".format(**locals())
         now_string = str(datetime.utcnow())
-        to_send.append([new_name,doc_request,obit_url,obit_headline,now_string])
+        to_send.append([new_name,doc_request,obit_url,obit_headline,now_string,pdf_date])
 
     elif should_request == "s":
         continue
@@ -121,6 +122,7 @@ if to_send:
         req_url = request[2]
         req_headline = request[3]
         req_time = request[4]
+        req_date = request[5]
 
         email_text = """
 FBI
@@ -155,7 +157,7 @@ FOIA The Dead
 
         print("\nHandcrafting a PDF of the obituary of {req_name}.".format(**locals()))
 
-        req_pdf_filename = req_name.lower().replace(" ","-") + "-nyt-obit.pdf"
+        req_pdf_filename = req_name.lower().replace(" ","-" ) + "-nyt-obit" + req_date + ".pdf"
         try:
             pdfkit.from_url(req_url, "pdfs/" + req_pdf_filename,options={'quiet':''})
         except OSError as error:
