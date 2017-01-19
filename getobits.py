@@ -157,7 +157,7 @@ FOIA The Dead
 
         print("\nHandcrafting a PDF of the obituary of {req_name}.".format(**locals()))
 
-        req_pdf_filename = req_name.lower().replace(" ","-" ) + "-nyt-obit" + req_date + ".pdf"
+        req_pdf_filename = req_name.lower().replace(" ","-" ) + "-nyt-obit-" + req_date + ".pdf"
         try:
             pdfkit.from_url(req_url, "pdfs/" + req_pdf_filename,options={'quiet':''})
         except OSError as error:
