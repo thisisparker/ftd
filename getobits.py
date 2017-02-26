@@ -6,6 +6,7 @@ import os, requests, json, datetime, smtplib, email.utils, sqlite3
 import yaml, pdfkit, html
 import ftd_tweets
 from datetime import datetime
+from slugify import slugify
 
 from email.header import Header
 from email.mime.text import MIMEText
@@ -157,7 +158,10 @@ FOIA The Dead
 
         print("\nHandcrafting a PDF of the obituary of {req_name}.".format(**locals()))
 
-        req_pdf_filename = req_name.lower().replace(" ","-" ) + "-nyt-obit-" + req_date + ".pdf"
+        slug = slugify(req_name)
+
+        req_pdf_filename = slug + "-nyt-obit-" + req_date + ".pdf"
+
         try:
             pdfkit.from_url(req_url, "pdfs/" + req_pdf_filename,options={'quiet':''})
         except OSError as error:
@@ -189,8 +193,8 @@ FOIA The Dead
         server.sendmail(from_address, [recipient_address,config['bcc_address']], msg.as_string())
 
         conn.execute("""
-    insert into requests (name, obit_headline, obit_url, requested_at)
-    values ('{req_name}','{req_headline}','{req_url}','{req_time}')
+    insert into requests (name, obit_headline, obit_url, requested_at, slug)
+    values ('{req_name}', '{req_headline}', '{req_url}', '{req_time}','{slug}')
     """.format(**locals()))
 
         conn.commit()
