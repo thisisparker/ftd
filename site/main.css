@@ -111,12 +111,24 @@ a:hover {
     color: #000;
 }
 
+a#about-link {
+    color: #666
+}
+
+a#about-link:hover {
+    color: #000;
+}
+
 body {
     max-width: 1200px;
     padding-left: 2em;
 }
 
-body.post-page  {
+body.post-page {
+    max-width: 50em;
+}
+
+body.about-page {
     max-width: 50em;
 }
 

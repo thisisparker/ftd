@@ -58,8 +58,12 @@ def create_homepage(entries):
         meta(property="og:description", content="A transparency project requesting and releasing the FBI files of notable individuals found in the obituary pages.")
         
 
-    h.body[0].add(h1("FOIA The Dead has released {pagecount:,} pages of FBI records on {entrycount} public figures.".format(**locals()), id="headline"))
-    l = h.body[1].add(ul(id="results-list"))        
+    headline = h1("FOIA The Dead has released {pagecount:,} pages of FBI records on {entrycount} public figures. ".format(**locals()), id="headline", __pretty = False)
+    about_link = a("read more »", href="about.html",
+        id="about-link")
+
+    h.body[0].add(headline).add(about_link)
+    l = h.body[1].add(ul(id="results-list"))
 
     for entry in entries:
         post_link = urllib.parse.urljoin("posts/", 
@@ -135,6 +139,41 @@ def create_error_page():
     with open("site/error.html", "w") as f:
         f.write(h.render())
 
+def create_about_page():
+    h = create_boilerplate_html()
+
+    h.title = "About FOIA The Dead"
+
+    with h.head:
+        meta(name="twitter:title", content=h.title)
+        meta(name="twitter:description", 
+            content="FOIA The Dead is a long-term transparency project using the Freedom of Information Act. It releases FBI records on recently deceased public figures.")
+
+        about_url = urllib.parse.urljoin(home, "about.html")
+
+        meta(property="og:url", content=about_url)
+        meta(property="og:title", content=h.title)
+        meta(property="og:description", 
+            content="FOIA The Dead is a long-term transparency project using the Freedom of Information Act. It releases FBI records on recently deceased public figures.")
+
+    h.body['class'] = "about-page"
+
+    h.body[0].add(h1("About FOIA The Dead"))
+
+    about_text="""<p>FOIA The Dead is a long-term transparency project that uses the <a href="https://en.wikipedia.org/wiki/Freedom_of_Information_Act_(United_States)">Freedom of Information Act (FOIA)</a> to request information from the FBI about the recently deceased.</p>
+
+<p>That law requires certain government agencies to produce records upon a request from the public. One significant exception to that requirement is that, to protect the privacy of individuals, federal agencies may not release information about living people. But after their death, their privacy concerns are diminished, and those records can become available.</p>
+
+<p>FOIA The Dead was founded to address that transition. When somebody's obituary appears in the <i>New York Times</i>, FOIA The Dead sends an automated request to the FBI for their (newly-available) records. In many cases, the FBI responds that it has no files on the individual. But in some cases it does, and can now release those files upon request. When FOIA The Dead receives it, the file gets published for the world to see.</p>
+
+<p>This project is written and maintained by <a href="https://twitter.com/xor">Parker Higgins</a>. You can <a href="https://twitter.com/foiathedead">follow it on Twitter</a>. Source code is <a href="https://github.com/thisisparker/ftd/">available on Github</a>, and most of the site is <a href="https://foiathedead.org/entries.json">available as JSON</a>. Special thanks to <a href="https://twitter.com/trevortimm">Trevor Timm</a> and the <a href="https://freedom.press">Freedom of the Press Foundation</a> for their support.</p>"""
+
+    with h.body[1]:
+        text(about_text, escape=False)
+
+    with open("site/about.html", "w") as f:
+        f.write(h.render())
+
 def create_entries_list(cursor):
     if not os.path.exists("site/entries.json"):
         with open("site/entries.json","w") as f:
@@ -185,7 +224,7 @@ def get_pagecount(doc):
     time.sleep(1)
     return dc.documents.get(doc).pages
 
-def main(hp=True, posts=False, error=False):
+def main(hp=True, about=True, posts=False, error=False):
     db = config['db']
     conn = sqlite3.connect(db)
     c = conn.cursor()
@@ -194,6 +233,9 @@ def main(hp=True, posts=False, error=False):
 
     if hp:
         create_homepage(entries)
+
+    if about:
+        create_about_page()
 
     if posts:
         populate_posts(entries)
