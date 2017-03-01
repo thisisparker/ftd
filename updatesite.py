@@ -152,7 +152,7 @@ def create_entries_list(cursor):
 
         if db_entry['name'] not in (
             [entry['name'] for entry in entries]):
-            entries.append(add_new_entry(db_entry)) 
+            entries.insert(0, add_new_entry(db_entry)) 
 
     with open("site/entries.json", "w") as f:
         json.dump(entries, f, indent=4, sort_keys=True)
