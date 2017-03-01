@@ -91,6 +91,13 @@ def populate_post(entry):
         meta(name="twitter:description", 
             content=entry['twitter_desc'])
 
+        post_url = urllib.parse.urljoin(home, "posts/" + 
+            entry['slug'] + ".html")
+
+        meta(property="og:url", content=post_url)
+        meta(property="og:title", content=h.title)
+        meta(property="og:description", content=entry['fb_desc'])
+
     h.body['class'] = "post-page"
 
     h.body[0].add(h1(a("FOIA The Dead", href=home)))
