@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-# Creates a static HTML document from source material in the
-# FOIA The Dead database.
+# Creates a set of static HTML documents from source material in 
+# the FOIA The Dead database.
 
-import dominate, os, sqlite3, time, urllib, yaml
+# TODO: Create command line flags for partial updates
+
+import dominate, html2text, json, os, sqlite3, time, urllib, yaml
 from documentcloud import DocumentCloud
 from dominate.tags import *
 from dominate.util import text
@@ -31,6 +33,8 @@ def create_boilerplate_html():
         meta(name="twitter:site", content="@FOIAtheDead")
         meta(name="twitter:image", content=logo_url)
 
+        meta(property="og:image", content=logo_url)
+
     h.body.add(div(id=name) for name in ["header",
         "content","footer"])
 
@@ -40,15 +44,19 @@ def create_boilerplate_html():
     return h
 
 def create_homepage(entries):
-    pagecount = sum([get_pagecount(entry['documentcloud_id']) 
-        for entry in entries])
+    pagecount = sum([entry['pages'] for entry in entries])
     entrycount = len(entries)
 
     h = create_boilerplate_html()
 
     with h.head:
         meta(name="twitter:title", content="FOIA The Dead")
-        meta(name="twitter:description", content="A transparency project requesting and releasing the FBI files of notable indivuals found in the obituary pages.")
+        meta(name="twitter:description", content="A transparency project requesting and releasing the FBI files of notable individuals found in the obituary pages.")
+
+        meta(property="og:url", content=home)
+        meta(property="og:title", content=h.title)
+        meta(property="og:description", content="A transparency project requesting and releasing the FBI files of notable individuals found in the obituary pages.")
+        
 
     h.body[0].add(h1("FOIA The Dead has released {pagecount:,} pages of FBI records on {entrycount} public figures.".format(**locals()), id="headline"))
     l = h.body[1].add(ul(id="results-list"))        
@@ -80,7 +88,8 @@ def populate_post(entry):
 
     with h.head:
         meta(name="twitter:title", content=h.title)
-        meta(name="twitter:description", content="FBI file and information about " + entry['name'])
+        meta(name="twitter:description", 
+            content=entry['twitter_desc'])
 
     h.body['class'] = "post-page"
 
@@ -120,23 +129,49 @@ def create_error_page():
         f.write(h.render())
 
 def create_entries_list(cursor):
+    if not os.path.exists("site/entries.json"):
+        with open("site/entries.json","w") as f:
+            json.dump([],f)
 
-    #TODO: Store the current state of some of this stuff
-    # (especially page count, which changes never) so builds
-    # can be more incremental
+    with open("site/entries.json", "r") as f:
+        entries = json.load(f)
 
-    entries = []
+    db_entries = []
+
     for values in cursor.execute('select name, slug, obit_headline, obit_url, documentcloud_id, short_description, long_description from requests where documentcloud_id is not null order by id desc'):
         keys = ['name', 'slug', 'headline', 'obit_url',
             'documentcloud_id', 'short_desc', 'long_desc']  
-        entry = dict(zip(keys,values))
-        entry['documentcloud_url'] = urllib.parse.urljoin(
+        db_entry = dict(zip(keys,values))
+
+        if db_entry['name'] not in (
+            [entry['name'] for entry in entries]):
+            entries.append(add_new_entry(db_entry)) 
+
+    with open("site/entries.json", "w") as f:
+        json.dump(entries, f, indent=4, sort_keys=True)
+
+    return entries
+
+def add_new_entry(entry):
+    entry['documentcloud_url'] = urllib.parse.urljoin(
             "https://www.documentcloud.org/documents/",
             entry['documentcloud_id'])
-#        entry['pages'] = get_pagecount(entry['documentcloud_id'])
 
-        entries.append(entry)
-    return entries
+    entry['pages'] = get_pagecount(entry['documentcloud_id'])
+
+    html_parser = html2text.HTML2Text(bodywidth=0)
+    html_parser.ignore_links = True
+
+    if entry['short_desc']:
+        entry['twitter_desc'] = html_parser.handle(
+            entry['short_desc']).strip()
+    else:
+        entry['twitter_desc'] = "FBI file and information about {}.".format(entry['name'])
+
+    entry['fb_desc'] = entry['twitter_desc']
+
+    return entry
+
 
 def get_pagecount(doc):
     print("Fetching pagecount for {}.".format(doc))
