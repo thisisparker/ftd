@@ -56,6 +56,8 @@ def create_homepage(entries):
         meta(property="og:url", content=home)
         meta(property="og:title", content=h.title)
         meta(property="og:description", content="A transparency project requesting and releasing the FBI files of notable individuals found in the obituary pages.")
+
+        comment("Looking to scrape this page? Almost everything is available in entries.json.")
         
 
     headline = h1("FOIA The Dead has released {pagecount:,} pages of FBI records on {entrycount} public figures. ".format(**locals()), id="headline", __pretty = False)
@@ -166,7 +168,7 @@ def create_about_page():
 
 <p>FOIA The Dead was founded to address that transition. When somebody's obituary appears in the <i>New York Times</i>, FOIA The Dead sends an automated request to the FBI for their (newly-available) records. In many cases, the FBI responds that it has no files on the individual. But in some cases it does, and can now release those files upon request. When FOIA The Dead receives it, the file gets published for the world to see.</p>
 
-<p>This project is written and maintained by <a href="https://twitter.com/xor">Parker Higgins</a>. You can <a href="https://twitter.com/foiathedead">follow it on Twitter</a>. Source code is <a href="https://github.com/thisisparker/ftd/">available on Github</a>, and most of the site is <a href="https://foiathedead.org/entries.json">available as JSON</a>. Special thanks to <a href="https://twitter.com/trevortimm">Trevor Timm</a> and the <a href="https://freedom.press">Freedom of the Press Foundation</a> for their support.</p>"""
+<p>This project is written and maintained by <a href="https://twitter.com/xor">Parker Higgins</a>. You can <a href="https://twitter.com/foiathedead">follow it on Twitter</a>. Source code is <a href="https://github.com/thisisparker/ftd/">available on GitHub</a>, and most of the site is <a href="https://foiathedead.org/entries.json">available as JSON</a>. Special thanks to <a href="https://twitter.com/trevortimm">Trevor Timm</a> and the <a href="https://freedom.press">Freedom of the Press Foundation</a> for their support.</p>"""
 
     with h.body[1]:
         text(about_text, escape=False)
