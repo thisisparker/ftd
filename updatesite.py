@@ -22,11 +22,14 @@ def create_boilerplate_html():
 
     with h.head:
         meta(charset="utf-8")
-        meta(name="viewport", 
+        meta(
+            name="viewport", 
             content="width=device-width, initial-scale=1")
-        link(rel="stylesheet", 
+        link(
+            rel="stylesheet", 
             href= urllib.parse.urljoin(home, "normalize.css"))
-        link(rel="stylesheet",
+        link(
+            rel="stylesheet",
             href= urllib.parse.urljoin(home, "main.css"))
 
         meta(name="twitter:card", content="summary")
@@ -35,12 +38,13 @@ def create_boilerplate_html():
 
         meta(property="og:image", content=logo_url)
 
-    h.body.add(div(id=name) for name in ["header",
-        "content","footer"])
+    h.body.add(
+        div(id=name) for name in ["header","content","footer"])
 
     h.body[0].add(a(img(src=logo_url, id="logo"),href=home))
 
     h.body[2].add(div("© 2017 FOIA The Dead", id="copyright"))
+
     return h
 
 def create_homepage(entries):
@@ -51,16 +55,22 @@ def create_homepage(entries):
 
     with h.head:
         meta(name="twitter:title", content="FOIA The Dead")
-        meta(name="twitter:description", content="A transparency project requesting and releasing the FBI files of notable individuals found in the obituary pages.")
+        meta(
+            name="twitter:description",
+            content="A transparency project requesting and releasing the FBI files of notable individuals found in the obituary pages.")
 
         meta(property="og:url", content=home)
         meta(property="og:title", content=h.title)
-        meta(property="og:description", content="A transparency project requesting and releasing the FBI files of notable individuals found in the obituary pages.")
+        meta(
+            property="og:description",
+            content="A transparency project requesting and releasing the FBI files of notable individuals found in the obituary pages.")
 
         comment("Looking to scrape this page? Almost everything is available in entries.json.")
         
 
-    headline = h1("FOIA The Dead has released {pagecount:,} pages of FBI records on {entrycount} public figures. ".format(**locals()), id="headline", __pretty = False)
+    headline = h1(
+        "FOIA The Dead has released {pagecount:,} pages of FBI records on {entrycount} public figures. ".format(**locals()),
+        id="headline", __pretty = False)
     about_link = a("read more »", href="about.html",
         id="about-link")
 
@@ -68,11 +78,11 @@ def create_homepage(entries):
     l = h.body[1].add(ul(id="results-list"))
 
     for entry in entries:
-        post_link = urllib.parse.urljoin("posts/", 
-            entry['slug'] + ".html")
+        post_link = urllib.parse.urljoin(
+            "posts/", entry['slug'] + ".html")
         tile = l.add(li(h2(a(entry['name'], href=post_link))))
-        obit_link = a(entry['headline'], 
-            href=entry['obit_url'])
+        obit_link = a(
+            entry['headline'], href=entry['obit_url'])
 
         with tile:
             if entry['short_desc']:
@@ -94,11 +104,12 @@ def populate_post(entry):
 
     with h.head:
         meta(name="twitter:title", content=h.title)
-        meta(name="twitter:description", 
+        meta(
+            name="twitter:description", 
             content=entry['twitter_desc'])
 
-        post_url = urllib.parse.urljoin(home, "posts/" + 
-            entry['slug'] + ".html")
+        post_url = urllib.parse.urljoin(
+            home, "posts/" + entry['slug'] + ".html")
 
         meta(property="og:url", content=post_url)
         meta(property="og:title", content=h.title)
@@ -135,8 +146,8 @@ def create_error_page():
 
     h.body[0].add(h1(a("FOIA The Dead", href=home)))
 
-    h.body[1].add(h2("Sorry, this page is broken :(",
-        id="error-text"))
+    h.body[1].add(h2(
+        "Sorry, this page is broken :(", id="error-text"))
 
     with open("site/error.html", "w") as f:
         f.write(h.render())
@@ -148,14 +159,16 @@ def create_about_page():
 
     with h.head:
         meta(name="twitter:title", content=h.title)
-        meta(name="twitter:description", 
+        meta(
+            name="twitter:description", 
             content="FOIA The Dead is a long-term transparency project using the Freedom of Information Act. It releases FBI records on recently deceased public figures.")
 
         about_url = urllib.parse.urljoin(home, "about.html")
 
         meta(property="og:url", content=about_url)
         meta(property="og:title", content=h.title)
-        meta(property="og:description", 
+        meta(
+            property="og:description", 
             content="FOIA The Dead is a long-term transparency project using the Freedom of Information Act. It releases FBI records on recently deceased public figures.")
 
     h.body['class'] = "about-page"
@@ -188,7 +201,7 @@ def create_entries_list(cursor):
 
     for values in cursor.execute('select name, slug, obit_headline, obit_url, documentcloud_id, short_description, long_description from requests where documentcloud_id is not null order by id desc'):
         keys = ['name', 'slug', 'headline', 'obit_url',
-            'documentcloud_id', 'short_desc', 'long_desc']  
+                'documentcloud_id', 'short_desc', 'long_desc']  
         db_entry = dict(zip(keys,values))
 
         if db_entry['name'] not in (
