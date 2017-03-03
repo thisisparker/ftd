@@ -1,5 +1,57 @@
 [
     {
+        "documentcloud_id": "3480311-Walter-Kohn-FBI-file",
+        "documentcloud_url": "https://www.documentcloud.org/documents/3480311-Walter-Kohn-FBI-file",
+        "fb_desc": "Nobel laureate Walter Kohn left Austria as a child refugee in 1940, coming to Canada and eventually to the United States to study and teach physics. His FBI file consists of an extensive background check for a Department of Energy job in the late 1980s.",
+        "headline": "Walter Kohn, Who Won Nobel in Chemistry, Dies at 93",
+        "long_desc": "<p>Nobel laureate Walter Kohn left Austria as a child refugee in 1940, coming to Canada and eventually to the United States to study and teach physics. He was the founding director of the Institute for Theoretical Physics at UC Santa Barbara, helped establish a program for Judaic studies at UC San Diego, and taught at Harvard and Carnegie Mellon. His FBI file consists of an extensive background check for a Department of Energy job in the late 1980s.</p>",
+        "name": "Walter Kohn",
+        "obit_url": "http://www.nytimes.com/2016/04/26/science/walter-kohn-nobel-winning-scientist-dies-at-93.html",
+        "pages": 167,
+        "short_desc": "<p>Nobel laureate Walter Kohn left Austria as a child refugee in 1940, coming to Canada and eventually to the United States to study and teach physics. His FBI file consists of an extensive background check for a Department of Energy job in the late 1980s.</p>",
+        "slug": "walter-kohn",
+        "twitter_desc": "Nobel laureate Walter Kohn left Austria as a child refugee in 1940, coming to Canada and eventually to the United States to study and teach physics. His FBI file consists of an extensive background check for a Department of Energy job in the late 1980s."
+    },
+    {
+        "documentcloud_id": "3480244-Hedy-Epstein-FBI-File",
+        "documentcloud_url": "https://www.documentcloud.org/documents/3480244-Hedy-Epstein-FBI-File",
+        "fb_desc": "Hedy Epstein, a Holocaust survivor who served as a translator in the Nuremberg trials before emigrating to the U.S., worked as an activist for various causes over a span of more than five decades. Her FBI file covers those five decades, and the overwhelming majority concerns housing discrimination cases she helped prepare in the 1970s.",
+        "headline": "Hedy Epstein, Rights Activist and Holocaust Survivor, Dies at 91",
+        "long_desc": null,
+        "name": "Hedy Epstein",
+        "obit_url": "http://www.nytimes.com/2016/05/29/us/hedy-epstein-rights-activist-and-holocaust-survivor-dies-at-91.html",
+        "pages": 430,
+        "short_desc": "<p>Hedy Epstein, a Holocaust survivor who served as a translator in the Nuremberg trials before emigrating to the U.S., worked as an activist for various causes over a span of more than five decades. Her FBI file covers those five decades, and the overwhelming majority concerns housing discrimination cases she helped prepare in the 1970s.</p>",
+        "slug": "hedy-epstein",
+        "twitter_desc": "Hedy Epstein, a Holocaust survivor who served as a translator in the Nuremberg trials before emigrating to the U.S., worked as an activist for various causes over a span of more than five decades. Her FBI file covers those five decades, and the overwhelming majority concerns housing discrimination cases she helped prepare in the 1970s."
+    },
+    {
+        "documentcloud_id": "3480233-Daniel-Aaron-FBI-file",
+        "documentcloud_url": "https://www.documentcloud.org/documents/3480233-Daniel-Aaron-FBI-file",
+        "fb_desc": "Daniel Aaron was a literary critic and historian credited with pioneering the field of \"American studies.\" His short FBI file is chiefly concerned with his contribution to a study on the role of Communism in the United States, announced in 1955.",
+        "headline": "Daniel Aaron, Critic and Historian Who Pioneered American Studies, Dies at 103",
+        "long_desc": null,
+        "name": "Daniel Aaron",
+        "obit_url": "http://www.nytimes.com/2016/05/04/books/daniel-aaron-literary-critic-and-historian-dies-at-103.html",
+        "pages": 17,
+        "short_desc": "<p>Daniel Aaron was a literary critic and historian credited with pioneering the field of \"American studies.\" His short FBI file is chiefly concerned with his contribution to a study on the role of Communism in the United States, announced in 1955.</p>",
+        "slug": "daniel-aaron",
+        "twitter_desc": "Daniel Aaron was a literary critic and historian credited with pioneering the field of \"American studies.\" His short FBI file is chiefly concerned with his contribution to a study on the role of Communism in the United States, announced in 1955."
+    },
+    {
+        "documentcloud_id": "3476757-Joseph-Medicine-Crow-FBI-file",
+        "documentcloud_url": "https://www.documentcloud.org/documents/3476757-Joseph-Medicine-Crow-FBI-file",
+        "fb_desc": "Joseph Medicine Crow was a widely renowned Native American historian and anthropologist and the last living person to have heard spoken testimony from people at the Battle of the Little Bighorn. His FBI file consists only of a single-page interview he gave to special agents about a friend, a Jeep accident, and an angry mob weilding two-by-fours.",
+        "headline": "Joseph Medicine Crow, Tribal War Chief and Historian, Dies at 102",
+        "long_desc": null,
+        "name": "Joseph Medicine Crow",
+        "obit_url": "http://www.nytimes.com/2016/04/05/us/joseph-medicine-crow-tribal-war-chief-and-historian-dies-at-102.html",
+        "pages": 1,
+        "short_desc": "<p>Joseph Medicine Crow was a widely renowned Native American historian and anthropologist and the last living person to have heard spoken testimony from people at the Battle of the Little Bighorn. His FBI file consists only of a single-page interview he gave to special agents about a friend, a Jeep accident, and an angry mob weilding two-by-fours.</p>",
+        "slug": "joseph-medicine-crow",
+        "twitter_desc": "Joseph Medicine Crow was a widely renowned Native American historian and anthropologist and the last living person to have heard spoken testimony from people at the Battle of the Little Bighorn. His FBI file consists only of a single-page interview he gave to special agents about a friend, a Jeep accident, and an angry mob weilding two-by-fours."
+    },
+    {
         "documentcloud_id": "3475344-Haskell-Wexler-FBI-File",
         "documentcloud_url": "https://www.documentcloud.org/documents/3475344-Haskell-Wexler-FBI-File",
         "fb_desc": "Haskell Wexler was the award-winning filmmaker known for \"Medium Cool\" (1969) and others. The FBI monitored him before and after his 1976 documentary \"Underground,\" about the radical Weathermen, and attempted to subpoena his raw footage.",
