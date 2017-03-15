@@ -1,6 +1,7 @@
 config.yaml
 *.db
 *.pdf
+*.html
 *~
 __pycache__/*
 .env

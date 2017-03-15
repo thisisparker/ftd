@@ -4,7 +4,14 @@
 
 # TODO: Create command line flags for partial updates
 
-import dominate, html2text, json, os, sqlite3, time, urllib, yaml
+import dominate
+import html2text
+import json
+import os
+import sqlite3
+import time
+import urllib
+import yaml
 from documentcloud import DocumentCloud
 from dominate.tags import *
 from dominate.util import text
@@ -54,6 +61,10 @@ def create_homepage(entries):
     h = create_boilerplate_html()
 
     with h.head:
+        meta(
+            name="description",
+            content="A transparency project requesting and releasing the FBI files of notable individuals found in the obituary pages.")
+
         meta(name="twitter:title", content="FOIA The Dead")
         meta(
             name="twitter:description",
