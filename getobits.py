@@ -4,15 +4,17 @@
 
 import os, requests, json, datetime, smtplib, email.utils, sqlite3
 import yaml, pdfkit, html
-import ftd_tweets
+# import ftd_tweets
 from datetime import datetime
 from slugify import slugify
 
-from email.header import Header
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-from email.mime.base import MIMEBase
-from email import encoders
+# Deprecated email stuff after the big fax switch
+
+# from email.header import Header
+# from email.mime.text import MIMEText
+# from email.mime.multipart import MIMEMultipart
+# from email.mime.base import MIMEBase
+# from email import encoders
 
 config = yaml.load(open("config.yaml"))
 
@@ -36,13 +38,13 @@ api_results = json.loads(res.text)
 
 docs = api_results['response']['docs']
 
-from_name = config['from_name']
-from_address = config['from_address']
-email_pw = config['email_pw']
+# from_name = config['from_name']
+# from_address = config['from_address']
+# email_pw = config['email_pw']
 mailing_address = config['mailing_address']
 
-recipient_name = config['recipient_name']
-recipient_address = config['recipient_address']
+# recipient_name = config['recipient_name']
+# recipient_address = config['recipient_address']
 
 to_send = []
 
@@ -74,7 +76,7 @@ for obit in docs:
 
     doc_request = "A copy of all documents or FBI files pertaining to {dead_person}, an obituary of whom was published in {obit_source} on {obit_date} under the headline \"{obit_headline}\". Please see attached PDF copy of that obituary, which may also be found at {obit_url}.".format(**locals())
 
-    print("\nPreparing an email from {from_address} with the following request:\n".format(**locals()))
+    print("\nPreparing an email with the following request:\n")
 
     print(doc_request)
 
@@ -111,10 +113,15 @@ for obit in docs:
         break
 
 if to_send:
-    server = smtplib.SMTP(config['smtp_server'],587,timeout=120)
-    server.starttls()
-    server.ehlo()
-    server.login(from_address, email_pw)
+#    server = smtplib.SMTP(config['smtp_server'],587,timeout=120)
+#    server.starttls()
+#    server.ehlo()
+#    server.login(from_address, email_pw)
+
+    mr_url = config['mr_url']
+    mr_token = config['mr_token']
+    jurisdiction = config['mr_pk']
+    agency = config['mr_agency']
 
     for request in to_send:
 
@@ -173,33 +180,46 @@ FOIA The Dead
 
         print("\nSending FOIA request for {req_name} file via email.".format(**locals()))
 
-        email_subject = "FOIA Request, " + req_name
+#        email_subject = "FOIA Request, " + req_name
 
-        msg = MIMEMultipart()
-        msg['Subject'] = Header(email_subject, 'utf-8')
-        msg['From'] = email.utils.formataddr((from_name,from_address))
-        msg['To'] = email.utils.formataddr((recipient_name,recipient_address))
+#        msg = MIMEMultipart()
+#        msg['Subject'] = Header(email_subject, 'utf-8')
+#        msg['From'] = email.utils.formataddr((from_name,from_address))
+#        msg['To'] = email.utils.formataddr((recipient_name,recipient_address))
 
-        msg.attach(MIMEText(email_text, 'plain', 'utf-8'))
+#        msg.attach(MIMEText(email_text, 'plain', 'utf-8'))
 
-        attachment = MIMEBase('application', "octet-stream", name=req_pdf_filename)
-        attachment.set_payload(open("pdfs/" + req_pdf_filename,"rb").read())
-        encoders.encode_base64(attachment)
+#        attachment = MIMEBase('application', "octet-stream", name=req_pdf_filename)
+#        attachment.set_payload(open("pdfs/" + req_pdf_filename,"rb").read())
+#        encoders.encode_base64(attachment)
 
-        attachment.add_header('Content_Disposition','attachment',filename=req_pdf_filename)
+#        attachment.add_header('Content_Disposition','attachment',filename=req_pdf_filename)
 
-        msg.attach(attachment)
+#        msg.attach(attachment)
 
-        server.sendmail(from_address, [recipient_address,config['bcc_address']], msg.as_string())
+#        server.sendmail(from_address, [recipient_address,config['bcc_address']], msg.as_string())
 
-        conn.execute("""
-    insert into requests (name, obit_headline, obit_url, requested_at, slug)
-    values ('{req_name}', '{req_headline}', '{req_url}', '{req_time}','{slug}')
-    """.format(**locals()))
+        mr_data = json.dumps({
+            'jurisdiction': jurisdiction,
+            'agency': agency,
+            'title': req_name + ", FBI file",
+            'document_request': req_request})
+
+        mr_headers = {'Authorization': 'Token {}'.format(mr_token),
+            'content-type': 'application/json'}
+
+        r = requests.post(mr_url + 'foia/',
+            headers = mr_headers,
+            data = mr_data)
+
+#        conn.execute("""
+#    insert into requests (name, obit_headline, obit_url, requested_at, slug)
+#    values ('{req_name}', '{req_headline}', '{req_url}', '{req_time}','{slug}')
+#    """.format(**locals()))
 
         conn.commit()
     
-    server.quit()
+#    server.quit()
 
 conn.close()
 

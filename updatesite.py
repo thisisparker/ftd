@@ -3,6 +3,7 @@
 # the FOIA The Dead database.
 
 # TODO: Create command line flags for partial updates
+# TODO: Abstract top-level pages out into markdown files
 
 import dominate
 import html2text
