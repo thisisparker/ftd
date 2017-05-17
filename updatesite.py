@@ -51,7 +51,12 @@ def create_boilerplate_html():
 
     h.body[0].add(a(img(src=logo_url, id="logo"),href=home))
 
-    h.body[2].add(div("© 2017 FOIA The Dead", id="copyright"))
+    h.body[2].add(div(id="copyright"))
+
+    cc_by_img_url = urllib.parse.urljoin(home, "imgs/cc-by.png")
+
+    with h.body.getElementById('copyright'):
+        text('<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="{}" /></a>  FOIA The Dead is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons BY 4.0</a>.'.format(cc_by_img_url), escape = False)
 
     return h
 
@@ -98,7 +103,7 @@ def create_homepage(entries):
 
         with tile:
             if entry['short_desc']:
-                text(entry['short_desc'], escape=False)
+                text(entry['short_desc'], escape = False)
             p(a("Read more »", href=post_link))
             p("New York Times obit: ",
                 __pretty = False).add(obit_link)
