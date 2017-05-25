@@ -2,13 +2,13 @@
 # Creates a set of static HTML documents from source material in 
 # the FOIA The Dead database.
 
-# TODO: Create command line flags for partial updates
 # TODO: Abstract top-level pages out into markdown files
 
 import dominate
 import html2text
 import json
 import os
+import sys
 import sqlite3
 import time
 import urllib
@@ -61,6 +61,7 @@ def create_boilerplate_html():
     return h
 
 def create_homepage(entries):
+    print("Updating homepage.")
     pagecount = sum([entry['pages'] for entry in entries])
     entrycount = len(entries)
 
@@ -112,6 +113,7 @@ def create_homepage(entries):
         f.write(h.render())    
 
 def populate_posts(entries):
+    print("Updating posts.")
     for entry in entries:
         populate_post(entry)
     
@@ -159,6 +161,8 @@ def populate_post(entry):
         f.write(h.render())
 
 def create_error_page():
+    print("Updating error page.")
+
     h = create_boilerplate_html()
 
     h.body[0].add(h1(a("FOIA The Dead", href=home)))
@@ -170,6 +174,8 @@ def create_error_page():
         f.write(h.render())
 
 def create_about_page():
+    print("Updating about page.")
+
     h = create_boilerplate_html()
 
     h.title = "About FOIA The Dead"
@@ -263,18 +269,24 @@ def main(hp=True, about=True, posts=False, error=False):
 
     entries = create_entries_list(c)
 
-    if hp:
+    if len(sys.argv) < 2:
+        print("""By default this program will just update the list of entries tracked by the site. To update actual pages, add any of the following flags:
+- home
+- about
+- posts
+- error""")
+
+    if "home" in sys.argv:
         create_homepage(entries)
 
-    if about:
+    if "about" in sys.argv:
         create_about_page()
 
-    if posts:
+    if "posts" in sys.argv:
         populate_posts(entries)
 
-    if error:
+    if "error" in sys.argv:
         create_error_page()
-
 
 if __name__ == '__main__':
     main()
