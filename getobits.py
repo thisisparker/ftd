@@ -4,6 +4,7 @@
 
 import os, requests, json, datetime, sqlite3
 import yaml, pdfkit, html
+import boto3
 from datetime import datetime
 from slugify import slugify
 
@@ -117,13 +118,27 @@ def send_muckrock(request):
             print("\n!!! NOT SENDING a request for {req_name}, due to this error:\n {error}".format(**locals()))
             return
 
+    s3 = boto3.resource('s3')
+    
+    with open('pdfs/' + req_pdf_filename, 'rb') as f:
+        s3.meta.client.upload_fileobj(f, "ftd-pdfs", 
+            req_pdf_filename, 
+            ExtraArgs = {'ContentType':'application/pdf'})
+
+        print("\nUploading PDF to S3 as {req_pdf_filename}.".format(**locals()))
+
+    req_pdf_url = config['s3_root'] + req_pdf_filename
+
     print("\nSending FOIA request for {req_name} file via fax.".format(**locals()))
 
     mr_data = json.dumps({
         'jurisdiction': jurisdiction,
         'agency': agency,
         'title': req_name + ", FBI file",
-        'document_request': req_request})
+        'document_request': req_request,
+        'attachments': [req_pdf_url]})
+
+    print("\nAttaching PDF at the url {req_pdf_url}".format(**locals()))
 
     mr_headers = {'Authorization': 'Token {}'.format(mr_token),
         'content-type': 'application/json'}
@@ -131,6 +146,8 @@ def send_muckrock(request):
     r = requests.post(mr_url + 'foia/',
         headers = mr_headers,
         data = mr_data)
+
+    print("\nMuckrock says: " + r.text)
 
 #    conn.execute("""
 #    insert into requests (name, obit_headline, obit_url, requested_at, slug)
