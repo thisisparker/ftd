@@ -2,11 +2,10 @@
 # Creates a set of static HTML documents from source material in 
 # the FOIA The Dead database.
 
-# TODO: Abstract top-level pages out into markdown files
-
 import dominate
 import html2text
 import json
+import markdown
 import os
 import sys
 import sqlite3
@@ -198,16 +197,13 @@ def create_about_page():
 
     h.body[0].add(h1("About FOIA The Dead"))
 
-    about_text="""<p>FOIA The Dead is a long-term transparency project that uses the <a href="https://en.wikipedia.org/wiki/Freedom_of_Information_Act_(United_States)">Freedom of Information Act (FOIA)</a> to request information from the FBI about the recently deceased.</p>
-
-<p>That law requires certain government agencies to produce records upon a request from the public. One significant exception to that requirement is that, to protect the privacy of individuals, federal agencies may not release information about living people. But after their death, their privacy concerns are diminished, and those records can become available.</p>
-
-<p>FOIA The Dead was founded to address that transition. When somebody's obituary appears in the <i>New York Times</i>, FOIA The Dead sends an automated request to the FBI for their (newly-available) records. In many cases, the FBI responds that it has no files on the individual. But in some cases it does, and can now release those files upon request. When FOIA The Dead receives it, the file gets published for the world to see.</p>
-
-<p>This project is written and maintained by <a href="https://twitter.com/xor">Parker Higgins</a>. You can <a href="https://twitter.com/foiathedead">follow it on Twitter</a>. Source code is <a href="https://github.com/thisisparker/ftd/">available on GitHub</a>, and most of the site is <a href="https://foiathedead.org/entries.json">available as JSON</a>. Special thanks to <a href="https://twitter.com/trevortimm">Trevor Timm</a> and the <a href="https://freedom.press">Freedom of the Press Foundation</a> for their support.</p>"""
+    with open("site/about.md","r") as f:
+        about_text = f.read()
+    
+    about_html = markdown.markdown(about_text)
 
     with h.body[1]:
-        text(about_text, escape=False)
+        text(about_html, escape=False)
 
     with open("site/about.html", "w") as f:
         f.write(h.render())
