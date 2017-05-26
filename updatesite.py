@@ -195,7 +195,8 @@ def create_about_page():
 
     h.body['class'] = "about-page"
 
-    h.body[0].add(h1("About FOIA The Dead"))
+    h.body[0].add(h1(a("FOIA The Dead", href=home)))
+    h.body[0].add(h2("About this project"))
 
     with open("site/about.md","r") as f:
         about_text = f.read()
@@ -267,21 +268,21 @@ def main(hp=True, about=True, posts=False, error=False):
 
     if len(sys.argv) < 2:
         print("""By default this program will just update the list of entries tracked by the site. To update actual pages, add any of the following flags:
-- home
-- about
-- posts
-- error""")
+--home
+--about
+--posts
+--error""")
 
-    if "home" in sys.argv:
+    if "--home" in sys.argv:
         create_homepage(entries)
 
-    if "about" in sys.argv:
+    if "--about" in sys.argv:
         create_about_page()
 
-    if "posts" in sys.argv:
+    if "--posts" in sys.argv:
         populate_posts(entries)
 
-    if "error" in sys.argv:
+    if "--error" in sys.argv:
         create_error_page()
 
 if __name__ == '__main__':

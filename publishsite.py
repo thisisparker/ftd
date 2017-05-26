@@ -12,13 +12,16 @@ def main():
     keys = [leaf.lstrip("./") for leaf in contents]
 
     for index in range(len(contents)):
-        print("Uploading " + keys[index])
-    
         mime = mimetypes.guess_type(keys[index])
 
-        s3.meta.client.upload_file(contents[index],
-            "foiathedead.org", keys[index], ExtraArgs =         
-            {'ContentType':mime[0]})
+        if mime[0]:
+            print("Uploading " + keys[index])
+            s3.meta.client.upload_file(contents[index],
+                "foiathedead.org", keys[index], ExtraArgs =         
+                {'ContentType':mime[0]})
+
+        else:
+            print("Not uploading " + keys[index] + " because it has a nonstandard mimetype.")
 
     print("All uploaded.")
 
