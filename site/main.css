@@ -132,6 +132,11 @@ body.about-page {
     max-width: 50em;
 }
 
+.about-page #content {
+    clear:both;
+    margin-top: 4em;
+}
+
 #logo {
     float: left;
     width: 128px;
@@ -196,7 +201,7 @@ ul#results-list {
 }
 
 #footer {
-    margin: 0 0 2em 0;
+    margin: 2em 0 2em 1em;
 }
 
 /* ==========================================================================
