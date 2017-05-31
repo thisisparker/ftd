@@ -149,10 +149,10 @@ def send_muckrock(request):
 
     print("\nMuckrock says: " + r.text)
 
-#    conn.execute("""
-#    insert into requests (name, obit_headline, obit_url, requested_at, slug)
-#    values ('{req_name}', '{req_headline}', '{req_url}', '{req_time}','{slug}')
-#    """.format(**locals()))
+    conn.execute("""
+    insert into requests (name, obit_headline, obit_url, requested_at, slug)
+    values ('{req_name}', '{req_headline}', '{req_url}', '{req_time}','{slug}')
+    """.format(**locals()))
 
     conn.commit()
 
