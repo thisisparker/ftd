@@ -1,52 +1,19 @@
 #!/usr/bin/env python3
-# Grabs the last 10 NYT obits and prepares the text of a FOIA request for
-# their FBI files, then sends that request to the FBI
+# Grabs the last 10 NYT obits, prepares the text of a FOIA 
+# request for their FBI files, and sends that request to the FBI.
 
-import os, requests, json, datetime, smtplib, email.utils, sqlite3
+import os, requests, json, datetime, sqlite3
 import yaml, pdfkit, html
-import ftd_tweets
+import boto3
 from datetime import datetime
 from slugify import slugify
-
-from email.header import Header
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-from email.mime.base import MIMEBase
-from email import encoders
 
 config = yaml.load(open("config.yaml"))
 
 db = config['db']
 conn = sqlite3.connect(db)
 
-# Note: as the db gets bigger, this should take a slice.
-# For now, it's fine and fast enough to just check against all past requests.
-
-recent_requests_tuples = list(conn.execute('select name,obit_headline from requests order by id desc'))
-recent_requests_names, recent_requests_headlines = map(list, zip(*recent_requests_tuples))
-
-nyt_api_key = config['nyt_api_key']
-
-api_url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=type_of_material:%28%22Obituary%22%29&sort=newest&fl=headline,web_url,snippet,pub_date&api-key=" + nyt_api_key
-
-res = requests.get(api_url)
-res.raise_for_status()
-
-api_results = json.loads(res.text)
-
-docs = api_results['response']['docs']
-
-from_name = config['from_name']
-from_address = config['from_address']
-email_pw = config['email_pw']
-mailing_address = config['mailing_address']
-
-recipient_name = config['recipient_name']
-recipient_address = config['recipient_address']
-
-to_send = []
-
-def editname(headline):
+def edit_name(headline):
     name_check = "n"
     while name_check == "n":
         print("\nOK, you can edit the name. Here's what the headline says:\n".format(**locals()))
@@ -55,32 +22,49 @@ def editname(headline):
         name_check = input("\nRoger that. Does {new_name} look good? (Y/n) ".format(**locals()))
     return new_name
 
-for obit in docs:
-    obit_source = "The New York Times" # May be more sources in the future, for now just NYT.
+def nyt_api_request(key):
+    """Query NYT API and return recent obits."""
+    api_url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=type_of_material:%28%22Obituary%22%29&sort=newest&fl=headline,web_url,snippet,pub_date&api-key=" + key
+
+    res = requests.get(api_url)
+    res.raise_for_status()
+
+    api_results = json.loads(res.text)
+
+    return api_results['response']['docs']
+
+def get_past_requests():
+    """Query db and return two lists: past names and headlines."""
+    past_requests_tuples = list(conn.execute(
+        'select name,obit_headline from requests order by id desc'))
+    return map(list, zip(*past_requests_tuples))
+
+def process_obit(obit, past_names, past_headlines):
+    obit_source = "The New York Times" 
+    # May be more sources in the future, for now just NYT.
     obit_headline = html.unescape(obit['headline']['main'])
 
-    # This line converts NYT's ISO formatted pub_date to a human-readable format.
+    # This line converts NYT's ISO formatted pub_date 
+    # to a human-readable format.
     obit_date = datetime.strftime(datetime.strptime(obit['pub_date'],"%Y-%m-%dT%H:%M:%S%z"),"%B %-d, %Y")
     pdf_date = datetime.strftime(datetime.strptime(obit['pub_date'],"%Y-%m-%dT%H:%M:%S%z"),"%Y%m%d")
 
-    # guesses the name of the person by the headline up until the comma. 
+    # guesses the name of the person by the headline up 
+    # until the comma. 
     # Brittle, but matches NYT syntax mostly without fail so far.
     dead_person = obit_headline.split(",")[0] 
 
     obit_url = obit['web_url']
-    # Removed the following line because it doesn't do well with non-standard headlines. 
-    # Might try to figure out how to get it back in.
-    # obit_description = obit_headline.split(", Dies")[0].split(dead_person + ", ")[1] 
 
     doc_request = "A copy of all documents or FBI files pertaining to {dead_person}, an obituary of whom was published in {obit_source} on {obit_date} under the headline \"{obit_headline}\". Please see attached PDF copy of that obituary, which may also be found at {obit_url}.".format(**locals())
 
-    print("\nPreparing an email from {from_address} with the following request:\n".format(**locals()))
+    print("\nPreparing a fax with the following request:\n")
 
     print(doc_request)
 
-    if dead_person in recent_requests_names:
+    if dead_person in past_names:
         print("\nBut it looks like you've already sent a request for {dead_person}.".format(**locals()))
-    elif obit_headline in recent_requests_headlines:
+    elif obit_headline in past_headlines:
         print("\nBut it looks like you've already sent a request for the obit \"{obit_headline}\".".format(**locals()))
 
     should_request = input("\nLook good? (Y)es/(e)dit/(s)kip/(q)uit ")
@@ -89,118 +73,110 @@ for obit in docs:
 
         now_string = str(datetime.utcnow())
 
-        to_send.append([dead_person,doc_request,obit_url,obit_headline,now_string,pdf_date])
-
-# Below section would tweet, but holding off for now.
-
-#        should_tweet = input("\nTweet this request? Y/n ")
-#
-#        if should_tweet == "" or should_tweet == "Y":
-#            ftd_tweets.tweet_request(dead_person,obit_url)
+        return [dead_person, doc_request, obit_url, 
+            obit_headline, now_string, pdf_date]
 
     elif should_request == "e":
-        new_name = editname(obit_headline)
+        new_name = edit_name(obit_headline)
         doc_request = "A copy of all documents or FBI files pertaining to {new_name}, an obituary of whom was published in {obit_source} on {obit_date} under the headline \"{obit_headline}\". Please see attached PDF copy of that obituary, which may also be found at {obit_url}.".format(**locals())
         now_string = str(datetime.utcnow())
-        to_send.append([new_name,doc_request,obit_url,obit_headline,now_string,pdf_date])
+        return [new_name, doc_request, obit_url, 
+            obit_headline, now_string, pdf_date]
 
     elif should_request == "s":
-        continue
+        return None
 
     elif should_request == "q":
-        break
+        return "q"
 
-if to_send:
-    server = smtplib.SMTP(config['smtp_server'],587,timeout=120)
-    server.starttls()
-    server.ehlo()
-    server.login(from_address, email_pw)
+def send_muckrock(request):
+    mr_url = config['mr_url']
+    mr_token = config['mr_token']
+    jurisdiction = config['mr_pk']
+    agency = config['mr_agency']
 
-    for request in to_send:
+    req_name = request[0]
+    req_request = request[1]
+    req_url = request[2]
+    req_headline = request[3]
+    req_time = request[4]
+    req_date = request[5]
 
-        req_name = request[0]
-        req_request = request[1]
-        req_url = request[2]
-        req_headline = request[3]
-        req_time = request[4]
-        req_date = request[5]
+    print("\nHandcrafting a PDF of the obituary of {req_name}.".format(**locals()))
 
-        email_text = """
-FBI
-Record/Information Dissemination Section
-Attn: FOI/PA Request
-170 Marcel Drive
-Winchester, VA 22602-4843
+    slug = slugify(req_name)
 
-To whom it may concern:
+    req_pdf_filename = slug + "-nyt-obit-" + req_date + ".pdf"
 
-This is a request under 5 U.S.C. § 552, the Freedom of Information Act. I hereby request the following records:
+    try:
+        pdfkit.from_url(req_url,
+            "pdfs/" + req_pdf_filename,options={'quiet':''})
+    except OSError as error:
+        if "code 1" in str(error):
+            print("\nAn OSError occurred, but it's probably not a big deal.")
+        else:
+            print("\n!!! NOT SENDING a request for {req_name}, due to this error:\n {error}".format(**locals()))
+            return
 
-{req_request}
+    s3 = boto3.resource('s3')
+    
+    with open('pdfs/' + req_pdf_filename, 'rb') as f:
+        s3.meta.client.upload_fileobj(f, "ftd-pdfs", 
+            req_pdf_filename, 
+            ExtraArgs = {'ContentType':'application/pdf'})
 
-The requested documents will be made available to the general public, and this request is not being made for commercial purposes.
+        print("\nUploading PDF to S3 as {req_pdf_filename}.".format(**locals()))
 
-FOIA has always presumed that government records are open to public inspection, and the FOIA Improvement Act of 2016, Pub. L. 114-185, prohibits agencies from withholding records unless (1) "disclosure is prohibited by law" or (2) "the agency reasonably foresees that disclosure would harm an interest protected by" one of FOIA's exemptions. Id., §2, codified at 5 U.S.C. § 552(a)(8)(A). Thus, in addition to FOIA favoring disclosure and requiring its exemptions to be narrowly construed, Section 552(a)(8)(A) prohibits agencies from using their discretion to broadly withhold records merely because they believe an exemption could technically apply.
+    req_pdf_url = config['s3_root'] + req_pdf_filename
 
-FOIA The Dead is a noncommercial organization that uses Freedom of Information Act requests to gather information of interest to a segment of the general public, and uses its editorial skills to turn those raw materials into distinct works. It distributes those works free of charge to the general public on its website, foiathedead.org. As such, I believe I qualify as a representative of the news media for the purposes of this request.
+    print("\nSending FOIA request for {req_name} file via fax.".format(**locals()))
 
-Additionally, because FOIA The Dead is a noncommercial organization, this request cannot be construed to be in its or my commercial interest. Finally, I believe that documents responsive to this request are likely to contribute significantly to public understanding of the operations or activities of the government by demonstrating how the FBI as a governmental agency collects, organizes, and stores information about the prominent individual in question.
+    mr_data = json.dumps({
+        'jurisdiction': jurisdiction,
+        'agency': agency,
+        'title': req_name + ", FBI file",
+        'document_request': req_request,
+        'attachments': [req_pdf_url]})
 
-Considering these three factors, my request should be furnished without charge or at a rate reduced below the standard charge, as described in 5 U.S.C. § 552(A)(4)(a)(iii). Failing that, fees should be limited to the reasonable standard charges for document duplication, as described in 5 U.S.C. § 552(A)(4)(a)(ii).
+    print("\nAttaching PDF at the url {req_pdf_url}".format(**locals()))
 
-I am willing to pay up to $25 for the processing of this request. Please inform me if the estimated fees will exceed this limit before processing my request.
+    mr_headers = {'Authorization': 'Token {}'.format(mr_token),
+        'content-type': 'application/json'}
 
-Thank you for your consideration in this matter. I look forward to receiving your response to this request within 20 business days, as the statute requires.
+    r = requests.post(mr_url + 'foia/',
+        headers = mr_headers,
+        data = mr_data)
 
-Parker Higgins
-FOIA The Dead
-{mailing_address}""".format(**locals())
+    print("\nMuckrock says: " + r.text)
 
-        print("\nHandcrafting a PDF of the obituary of {req_name}.".format(**locals()))
-
-        slug = slugify(req_name)
-
-        req_pdf_filename = slug + "-nyt-obit-" + req_date + ".pdf"
-
-        try:
-            pdfkit.from_url(req_url, "pdfs/" + req_pdf_filename,options={'quiet':''})
-        except OSError as error:
-            if "code 1" in str(error):
-                print("\nAn OSError occurred, but it's probably not a big deal.")
-            else:
-                print("\n!!! NOT SENDING a request for {req_name}, due to this error:\n {error}".format(**locals()))
-                continue
-
-        print("\nSending FOIA request for {req_name} file via email.".format(**locals()))
-
-        email_subject = "FOIA Request, " + req_name
-
-        msg = MIMEMultipart()
-        msg['Subject'] = Header(email_subject, 'utf-8')
-        msg['From'] = email.utils.formataddr((from_name,from_address))
-        msg['To'] = email.utils.formataddr((recipient_name,recipient_address))
-
-        msg.attach(MIMEText(email_text, 'plain', 'utf-8'))
-
-        attachment = MIMEBase('application', "octet-stream", name=req_pdf_filename)
-        attachment.set_payload(open("pdfs/" + req_pdf_filename,"rb").read())
-        encoders.encode_base64(attachment)
-
-        attachment.add_header('Content_Disposition','attachment',filename=req_pdf_filename)
-
-        msg.attach(attachment)
-
-        server.sendmail(from_address, [recipient_address,config['bcc_address']], msg.as_string())
-
-        conn.execute("""
+    conn.execute("""
     insert into requests (name, obit_headline, obit_url, requested_at, slug)
     values ('{req_name}', '{req_headline}', '{req_url}', '{req_time}','{slug}')
     """.format(**locals()))
 
-        conn.commit()
-    
-    server.quit()
+    conn.commit()
 
-conn.close()
+def main():
+    docs = nyt_api_request(config['nyt_api_key'])
 
-print("\nAll done. Pleasure doing business with you.")
+    past_names, past_headlines = get_past_requests()
+
+    to_send = []
+
+    for obit in docs:
+        request = process_obit(obit, past_names, past_headlines)
+
+        if request == "q":
+            break
+        elif request is not None:
+            to_send.append(request)
+
+    for request in to_send:
+        send_muckrock(request)
+
+    conn.close()
+
+    print("\nAll done. Pleasure doing business with you.")
+
+if __name__ == '__main__':
+    main()

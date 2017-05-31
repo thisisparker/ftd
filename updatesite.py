@@ -2,12 +2,12 @@
 # Creates a set of static HTML documents from source material in 
 # the FOIA The Dead database.
 
-# TODO: Create command line flags for partial updates
-
 import dominate
 import html2text
 import json
+import markdown
 import os
+import sys
 import sqlite3
 import time
 import urllib
@@ -50,11 +50,17 @@ def create_boilerplate_html():
 
     h.body[0].add(a(img(src=logo_url, id="logo"),href=home))
 
-    h.body[2].add(div("© 2017 FOIA The Dead", id="copyright"))
+    h.body[2].add(div(id="copyright"))
+
+    cc_by_img_url = urllib.parse.urljoin(home, "imgs/cc-by.png")
+
+    with h.body.getElementById('copyright'):
+        text('<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="{}" /></a>  FOIA The Dead is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons BY 4.0</a>.'.format(cc_by_img_url), escape = False)
 
     return h
 
 def create_homepage(entries):
+    print("Updating homepage.")
     pagecount = sum([entry['pages'] for entry in entries])
     entrycount = len(entries)
 
@@ -97,7 +103,7 @@ def create_homepage(entries):
 
         with tile:
             if entry['short_desc']:
-                text(entry['short_desc'], escape=False)
+                text(entry['short_desc'], escape = False)
             p(a("Read more »", href=post_link))
             p("New York Times obit: ",
                 __pretty = False).add(obit_link)
@@ -106,6 +112,7 @@ def create_homepage(entries):
         f.write(h.render())    
 
 def populate_posts(entries):
+    print("Updating posts.")
     for entry in entries:
         populate_post(entry)
     
@@ -153,6 +160,8 @@ def populate_post(entry):
         f.write(h.render())
 
 def create_error_page():
+    print("Updating error page.")
+
     h = create_boilerplate_html()
 
     h.body[0].add(h1(a("FOIA The Dead", href=home)))
@@ -164,6 +173,8 @@ def create_error_page():
         f.write(h.render())
 
 def create_about_page():
+    print("Updating about page.")
+
     h = create_boilerplate_html()
 
     h.title = "About FOIA The Dead"
@@ -184,18 +195,16 @@ def create_about_page():
 
     h.body['class'] = "about-page"
 
-    h.body[0].add(h1("About FOIA The Dead"))
+    h.body[0].add(h1(a("FOIA The Dead", href=home)))
+    h.body[0].add(h2("About this project"))
 
-    about_text="""<p>FOIA The Dead is a long-term transparency project that uses the <a href="https://en.wikipedia.org/wiki/Freedom_of_Information_Act_(United_States)">Freedom of Information Act (FOIA)</a> to request information from the FBI about the recently deceased.</p>
-
-<p>That law requires certain government agencies to produce records upon a request from the public. One significant exception to that requirement is that, to protect the privacy of individuals, federal agencies may not release information about living people. But after their death, their privacy concerns are diminished, and those records can become available.</p>
-
-<p>FOIA The Dead was founded to address that transition. When somebody's obituary appears in the <i>New York Times</i>, FOIA The Dead sends an automated request to the FBI for their (newly-available) records. In many cases, the FBI responds that it has no files on the individual. But in some cases it does, and can now release those files upon request. When FOIA The Dead receives it, the file gets published for the world to see.</p>
-
-<p>This project is written and maintained by <a href="https://twitter.com/xor">Parker Higgins</a>. You can <a href="https://twitter.com/foiathedead">follow it on Twitter</a>. Source code is <a href="https://github.com/thisisparker/ftd/">available on GitHub</a>, and most of the site is <a href="https://foiathedead.org/entries.json">available as JSON</a>. Special thanks to <a href="https://twitter.com/trevortimm">Trevor Timm</a> and the <a href="https://freedom.press">Freedom of the Press Foundation</a> for their support.</p>"""
+    with open("site/about.md","r") as f:
+        about_text = f.read()
+    
+    about_html = markdown.markdown(about_text)
 
     with h.body[1]:
-        text(about_text, escape=False)
+        text(about_html, escape=False)
 
     with open("site/about.html", "w") as f:
         f.write(h.render())
@@ -257,18 +266,24 @@ def main(hp=True, about=True, posts=False, error=False):
 
     entries = create_entries_list(c)
 
-    if hp:
+    if len(sys.argv) < 2:
+        print("""By default this program will just update the list of entries tracked by the site. To update actual pages, add any of the following flags:
+--home
+--about
+--posts
+--error""")
+
+    if "--home" in sys.argv:
         create_homepage(entries)
 
-    if about:
+    if "--about" in sys.argv:
         create_about_page()
 
-    if posts:
+    if "--posts" in sys.argv:
         populate_posts(entries)
 
-    if error:
+    if "--error" in sys.argv:
         create_error_page()
-
 
 if __name__ == '__main__':
     main()
