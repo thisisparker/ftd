@@ -1,1 +1,2 @@
 *.html linguist-generated=true
+*.css linguist-vendored=true
