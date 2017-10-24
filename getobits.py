@@ -149,12 +149,15 @@ def send_muckrock(request):
 
     print("\nMuckrock says: " + r.text)
 
-    conn.execute("""
-    insert into requests (name, obit_headline, obit_url, requested_at, slug)
-    values ('{req_name}', '{req_headline}', '{req_url}', '{req_time}','{slug}')
-    """.format(**locals()))
+    response = r.json()
 
-    conn.commit()
+    if response['status'] == 'FOI Request submitted':
+        conn.execute("""
+        insert into requests (name, obit_headline, obit_url, requested_at, slug)
+        values ('{req_name}', '{req_headline}', '{req_url}', '{req_time}','{slug}')
+        """.format(**locals()))
+
+        conn.commit()
 
 def main():
     docs = nyt_api_request(config['nyt_api_key'])
