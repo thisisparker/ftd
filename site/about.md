@@ -4,6 +4,8 @@ That law requires certain government agencies to produce records upon a request 
 
 FOIA The Dead was founded to address that transition. When somebody's obituary appears in the _New York Times_, FOIA The Dead sends an automated request to the FBI for their (newly-available) records. In many cases, the FBI responds that it has no files on the individual. But in some cases it does, and can now release those files upon request. When FOIA The Dead receives it, the file gets published for the world to see.
 
-FOIA The Dead uses MuckRock to submit and track its requests with the FBI. Browse through [MuckRock's FOIA resources](https://www.muckrock.com) or [read about its API](https://www.muckrock.com/api/).
+Since October 2017, FOIA The Dead has been a special project of the [Freedom of the Press Foundation](https://freedom.press). The Freedom of the Press Foundation has provided institutional support and consulted on the project's development. 
 
-This project is written and maintained by [Parker Higgins](https://twitter.com/xor). You can [follow it on Twitter](https://twitter.com/foiathedead). Source code is [available on GitHub](https://github.com/thisisparker/ftd/), and most of the site is [available as JSON](https://foiathedead.org/entries.json). Special thanks to [Trevor Timm](https://twitter.com/trevortimm) and the [Freedom of the Press Foundation](https://freedom.press) for their support.
+Since March 2017, FOIA The Dead has used MuckRock to submit and track its requests with the FBI. Browse through [MuckRock's FOIA resources](https://www.muckrock.com) or [read about its API](https://www.muckrock.com/api/).
+
+This project is written and maintained by [Parker Higgins](https://twitter.com/xor). You can [follow it on Twitter](https://twitter.com/foiathedead). Source code is [available on GitHub](https://github.com/thisisparker/ftd/), and most of the site is [available as JSON](https://foiathedead.org/entries.json).
