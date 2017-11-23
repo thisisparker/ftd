@@ -94,7 +94,7 @@ def create_homepage(entries):
     headline = h1(
         "FOIA The Dead has released {pagecount:,} pages of FBI records on {entrycount} public figures. ".format(**locals()),
         id="headline", __pretty = False)
-    about_link = a("read more »", href="about.html",
+    about_link = a("read more »", href="about",
         id="about-link")
 
     h.body[0].add(headline).add(about_link)
@@ -212,7 +212,7 @@ def create_about_page():
     with h.body[1]:
         text(about_html, escape=False)
 
-    with open("site/about.html", "w") as f:
+    with open("site/about/index.html", "w") as f:
         f.write(h.render())
 
 def create_entries_list(cursor):
