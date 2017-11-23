@@ -129,7 +129,7 @@ def send_muckrock(request):
 
     req_pdf_url = config['s3_root'] + req_pdf_filename
 
-    print("\nSending FOIA request for {req_name} file via fax.".format(**locals()))
+    print("\nSending FOIA request for {req_name} file via Muckrock.".format(**locals()))
 
     mr_data = json.dumps({
         'jurisdiction': jurisdiction,
@@ -138,16 +138,12 @@ def send_muckrock(request):
         'document_request': req_request,
         'attachments': [req_pdf_url]})
 
-    print("\nAttaching PDF at the url {req_pdf_url}".format(**locals()))
-
     mr_headers = {'Authorization': 'Token {}'.format(mr_token),
         'content-type': 'application/json'}
 
     r = requests.post(mr_url + 'foia/',
         headers = mr_headers,
         data = mr_data)
-
-    print("\nMuckrock says: " + r.text)
 
     response = r.json()
 
