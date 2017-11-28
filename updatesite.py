@@ -2,6 +2,7 @@
 # Creates a set of static HTML documents from source material in 
 # the FOIA The Dead database.
 
+import copy
 import dominate
 import html2text
 import json
@@ -98,24 +99,41 @@ def create_homepage(entries):
         id="about-link")
 
     h.body[0].add(headline).add(about_link)
-    l = h.body[1].add(ul(id="results-list"))
 
-    for entry in entries:
-        post_link = urllib.parse.urljoin(
-            "posts/", entry['slug'] + ".html")
-        tile = l.add(li(h2(a(entry['name'], href=post_link))))
-        obit_link = a(
-            entry['headline'], href=entry['obit_url'])
+    pagegroups = [entries[i:i+12] for i in range(0, len(entries), 12)]
 
-        with tile:
-            if entry['short_desc']:
-                text(entry['short_desc'], escape = False)
-            p(a("Read more »", href=post_link))
-            p("New York Times obit: ",
-                __pretty = False).add(obit_link)
+    pagegroup_count = len(pagegroups)
 
-    with open("site/index.html","w") as f:
-        f.write(h.render())    
+    pagenum = 0 
+
+    for group in pagegroups:
+        pagenum += 1
+        page = copy.deepcopy(h)
+        l = page.body[1].add(ul(id="results-list"))
+        for entry in group:
+            post_link = urllib.parse.urljoin(
+                "posts/", entry['slug'] + ".html")
+            if pagenum != 1:
+                post_link = "../" + post_link
+            tile = l.add(li(h2(a(entry['name'], href=post_link))))
+            obit_link = a(
+                entry['headline'], href=entry['obit_url'])
+
+            with tile:
+                if entry['short_desc']:
+                    text(entry['short_desc'], escape = False)
+                p(a("Read more »", href=post_link))
+                p("New York Times obit: ",
+                    __pretty = False).add(obit_link)
+    
+        if pagenum == 1:
+            filename = "site/index.html"
+        else:
+            os.makedirs("site/{}".format(pagenum), exist_ok=True)
+            filename = "site/{}/index.html".format(pagenum)
+
+        with open(filename, "w") as f:
+            f.write(page.render())    
 
 def populate_posts(entries):
     print("Updating posts.")
