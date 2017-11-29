@@ -2,7 +2,6 @@
 # Creates a set of static HTML documents from source material in 
 # the FOIA The Dead database.
 
-import copy
 import dominate
 import html2text
 import json
