@@ -66,8 +66,7 @@ def create_boilerplate_html():
     
     return h
 
-def create_homepage(entries):
-    print("Updating homepage.")
+def create_numbered_page(entries):
     pagecount = sum([entry['pages'] for entry in entries])
     entrycount = len(entries)
 
@@ -90,7 +89,6 @@ def create_homepage(entries):
             content="A transparency project requesting and releasing the FBI files of notable individuals found in the obituary pages.")
 
         comment("Looking to scrape this page? Almost everything is available in entries.json.")
-        
 
     headline = h1(
         "FOIA The Dead has released {pagecount:,} pages of FBI records on {entrycount} public figures. ".format(**locals()),
@@ -100,16 +98,21 @@ def create_homepage(entries):
 
     h.body[0].add(headline).add(about_link)
 
+    return h
+
+
+def create_homepage(entries):
+    print("Updating homepage.")
+
     pagegroups = [entries[i:i+12] for i in range(0, len(entries), 12)]
 
     pagegroup_count = len(pagegroups)
 
-    pagenum = 0 
+    pagenum = 1 
 
     for group in pagegroups:
-        pagenum += 1
-        page = copy.deepcopy(h)
-        l = page.body[1].add(ul(id="results-list"))
+        h = create_numbered_page(entries)
+        l = h.body[1].add(ul(id="results-list"))
         for entry in group:
             post_link = urllib.parse.urljoin(
                 "posts/", entry['slug'] + ".html")
@@ -125,15 +128,37 @@ def create_homepage(entries):
                 p(a("Read more »", href=post_link))
                 p("New York Times obit: ",
                     __pretty = False).add(obit_link)
-    
-        if pagenum == 1:
+
+        nav = h.body[1].add(div(id="page-nav"))
+
+        pagination = nav.add(ul(id="pagination"))
+
+        page_links = [home]
+        page_links.extend([urllib.parse.urljoin(home, str(page)) for page in range(2, pagegroup_count + 1)])
+
+        pagination.add(li(a("«", href=home)))
+        
+        for index in range(len(page_links)):
+            number = index + 1
+            page = pagination.add(li(a(number, href=page_links[index])))
+            if number == pagenum:
+                with page:
+                    attr(cls="current-page")
+
+        pagination.add(li(a("»", href=page_links[-1])))
+
+        firstpage = True if pagenum == 1 else False
+       
+        if firstpage:
             filename = "site/index.html"
         else:
             os.makedirs("site/{}".format(pagenum), exist_ok=True)
             filename = "site/{}/index.html".format(pagenum)
 
         with open(filename, "w") as f:
-            f.write(page.render())    
+            f.write(h.render())    
+
+        pagenum += 1
 
 def populate_posts(entries):
     print("Updating posts.")
