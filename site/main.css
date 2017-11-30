@@ -200,8 +200,31 @@ ul#results-list {
     margin-bottom: 2em;
 }
 
-#footer img {
-    padding: 1em;
+ul#pagination {
+    list-style-type: none;
+    padding: 0 2em 0 0;
+}
+
+#pagination li {
+    display: inline-block;
+}
+
+#pagination li a {
+    text-decoration: none;
+    color: #000;
+    padding: 0 1em 0 1em;
+}
+
+#pagination li:hover {
+    background: #ddd;
+}
+
+.current-page {
+    background: #ddd;
+}
+
+#page-nav {
+    text-align: center;
 }
 
 @media screen and (min-width: 30em) {
@@ -214,8 +237,14 @@ ul#results-list {
     }
 }
 
+#footer {
+    clear: both;
+}
+
+
 #footer img {
     height: 31px;
+    padding: 1em;
 }
 
 /* ==========================================================================
