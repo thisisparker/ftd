@@ -102,7 +102,7 @@ def create_homepage(entries):
 
     for entry in entries:
         post_link = urllib.parse.urljoin(
-            "posts/", entry['slug'] + ".html")
+            "posts/", entry['slug'])
         tile = l.add(li(h2(a(entry['name'], href=post_link))))
         obit_link = a(
             entry['headline'], href=entry['obit_url'])
@@ -133,7 +133,7 @@ def populate_post(entry):
             content=entry['twitter_desc'])
 
         post_url = urllib.parse.urljoin(
-            home, "posts/" + entry['slug'] + ".html")
+            home, "posts/" + entry['slug'] + "/index.html")
 
         meta(property="og:url", content=post_url)
         meta(property="og:title", content=h.title)
@@ -156,12 +156,11 @@ def populate_post(entry):
 
         obit_link = a(entry['headline'], href=entry['obit_url'])
         p("New York Times obit: ", __pretty = False).add(obit_link)
-
         
         text(dc_embed, escape=False)
         
-
-    path = os.path.join("site/posts/",entry['slug'] + ".html")
+    os.makedirs("site/posts/" + entry['slug'], exist_ok=True)
+    path = os.path.join("site/posts/", entry['slug'], "index.html")
     with open(path, "w") as f:
         f.write(h.render())
 
