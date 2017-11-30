@@ -114,7 +114,7 @@ def create_homepage(entries):
         l = h.body[1].add(ul(id="results-list"))
         for entry in group:
             post_link = urllib.parse.urljoin(
-                "posts/", entry['slug'] + ".html")
+                "posts/", entry['slug'])
             if pagenum != 1:
                 post_link = "../" + post_link
             tile = l.add(li(h2(a(entry['name'], href=post_link))))
