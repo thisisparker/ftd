@@ -15,6 +15,7 @@ import yaml
 from documentcloud import DocumentCloud
 from dominate.tags import *
 from dominate.util import text
+from feedgen.feed import FeedGenerator
 
 config = yaml.load(open("config.yaml"))
 dc = DocumentCloud(config['dc_user'],config['dc_password'])
@@ -87,6 +88,8 @@ def create_numbered_page(entries):
             property="og:description",
             content="A transparency project requesting and releasing the FBI files of notable individuals found in the obituary pages.")
 
+        link(rel="alternate", type="application/rss+xml", href=urllib.parse.urljoin(home, "rss.xml"))
+
         comment("Looking to scrape this page? Almost everything is available in entries.json.")
 
     headline = h1(
@@ -98,7 +101,6 @@ def create_numbered_page(entries):
     h.body[0].add(headline).add(about_link)
 
     return h
-
 
 def create_homepage(entries):
     print("Updating homepage.")
@@ -256,6 +258,29 @@ def create_about_page():
     with open("site/about/index.html", "w") as f:
         f.write(h.render())
 
+def create_feeds(entries):
+    fg = FeedGenerator()
+    fg.title('FOIA The Dead')
+    fg.author(name='FOIA The Dead', email='foia@foiathedead.org')
+    fg.link(href=home, rel='alternate')
+    fg.id(home)
+    fg.description("FOIA The Dead is a long-term transparency project using the Freedom of Information Act. It releases FBI records on recently deceased public figures.")
+
+    for entry in reversed(entries):
+        fe = fg.add_entry()
+        fe.title(entry['name'])
+        fe.link(href=urllib.parse.urljoin(home, "posts/" + entry['slug'] + "/"))
+        fe.id(urllib.parse.urljoin(home, "posts/" + entry['slug'] + "/"))
+        if entry['long_desc']:
+            fe.content(entry['long_desc'])
+        elif entry['short_desc']:
+            fe.content(entry['short_desc'])
+        else:
+            fe.content("FOIA The Dead has obtained the FBI file for {}.".format(entry['name']))
+
+    fg.atom_file('site/atom.xml', pretty=True)
+    fg.rss_file('site/rss.xml', pretty=True)
+
 def create_entries_list(cursor):
     if not os.path.exists("site/entries.json"):
         with open("site/entries.json","w") as f:
@@ -300,7 +325,6 @@ def add_new_entry(entry):
 
     return entry
 
-
 def get_pagecount(doc):
     print("Fetching pagecount for {}.".format(doc))
     time.sleep(1)
@@ -316,12 +340,16 @@ def main(hp=True, about=True, posts=False, error=False):
     if len(sys.argv) < 2:
         print("""By default this program will just update the list of entries tracked by the site. To update actual pages, add any of the following flags:
 --home
+--feeds
 --about
 --posts
 --error""")
 
     if "--home" in sys.argv:
         create_homepage(entries)
+
+    if "--feeds" in sys.argv:
+        create_feeds(entries)
 
     if "--about" in sys.argv:
         create_about_page()
