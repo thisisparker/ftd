@@ -232,7 +232,7 @@ def create_about_page():
             name="twitter:description", 
             content="FOIA The Dead is a long-term transparency project using the Freedom of Information Act. It releases FBI records on recently deceased public figures.")
 
-        about_url = urllib.parse.urljoin(home, "about.html")
+        about_url = urllib.parse.urljoin(home, "about/")
 
         meta(property="og:url", content=about_url)
         meta(property="og:title", content=h.title)
