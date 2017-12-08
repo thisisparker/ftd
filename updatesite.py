@@ -15,6 +15,7 @@ import yaml
 from documentcloud import DocumentCloud
 from dominate.tags import *
 from dominate.util import text
+from feedgen.feed import FeedGenerator
 
 config = yaml.load(open("config.yaml"))
 dc = DocumentCloud(config['dc_user'],config['dc_password'])
@@ -52,15 +53,20 @@ def create_boilerplate_html():
 
     h.body[2].add(div(id="copyright"))
 
+    h.body[2].add(div(id="fpf"))
+
     cc_by_img_url = urllib.parse.urljoin(home, "imgs/cc-by.png")
+    fpf_img_url = urllib.parse.urljoin(home, "imgs/fpf-logo.png")
 
     with h.body.getElementById('copyright'):
-        text('<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="{}" /></a>  FOIA The Dead is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons BY 4.0</a>.'.format(cc_by_img_url), escape = False)
+        text('<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="{}" /></a>'.format(cc_by_img_url), escape = False)
 
+    with h.body.getElementById('fpf'):
+        text('<a href="https://freedom.press"><img alt="Freedom of the Press Foundation" src={} /></a>'.format(fpf_img_url), escape = False)
+    
     return h
 
-def create_homepage(entries):
-    print("Updating homepage.")
+def create_numbered_page(entries):
     pagecount = sum([entry['pages'] for entry in entries])
     entrycount = len(entries)
 
@@ -82,34 +88,78 @@ def create_homepage(entries):
             property="og:description",
             content="A transparency project requesting and releasing the FBI files of notable individuals found in the obituary pages.")
 
+        link(rel="alternate", type="application/rss+xml", href=urllib.parse.urljoin(home, "rss.xml"))
+
         comment("Looking to scrape this page? Almost everything is available in entries.json.")
-        
 
     headline = h1(
         "FOIA The Dead has released {pagecount:,} pages of FBI records on {entrycount} public figures. ".format(**locals()),
         id="headline", __pretty = False)
-    about_link = a("read more »", href="about.html",
+    about_link = a("read more »", href="about",
         id="about-link")
 
     h.body[0].add(headline).add(about_link)
-    l = h.body[1].add(ul(id="results-list"))
 
-    for entry in entries:
-        post_link = urllib.parse.urljoin(
-            "posts/", entry['slug'] + ".html")
-        tile = l.add(li(h2(a(entry['name'], href=post_link))))
-        obit_link = a(
-            entry['headline'], href=entry['obit_url'])
+    return h
 
-        with tile:
-            if entry['short_desc']:
-                text(entry['short_desc'], escape = False)
-            p(a("Read more »", href=post_link))
-            p("New York Times obit: ",
-                __pretty = False).add(obit_link)
+def create_homepage(entries):
+    print("Updating homepage.")
 
-    with open("site/index.html","w") as f:
-        f.write(h.render())    
+    pagegroups = [entries[i:i+12] for i in range(0, len(entries), 12)]
+
+    pagegroup_count = len(pagegroups)
+
+    pagenum = 1 
+
+    for group in pagegroups:
+        h = create_numbered_page(entries)
+        l = h.body[1].add(ul(id="results-list"))
+        for entry in group:
+            post_link = urllib.parse.urljoin(
+                "posts/", entry['slug'])
+            if pagenum != 1:
+                post_link = "../" + post_link
+            tile = l.add(li(h2(a(entry['name'], href=post_link))))
+            obit_link = a(
+                entry['headline'], href=entry['obit_url'])
+
+            with tile:
+                if entry['short_desc']:
+                    text(entry['short_desc'], escape = False)
+                p(a("Read more »", href=post_link))
+                p("New York Times obit: ",
+                    __pretty = False).add(obit_link)
+
+        nav = h.body[1].add(div(id="page-nav"))
+
+        pagination = nav.add(ul(id="pagination"))
+
+        page_links = [home]
+        page_links.extend([urllib.parse.urljoin(home, str(page)) for page in range(2, pagegroup_count + 1)])
+
+        pagination.add(li(a("«", href=home)))
+        
+        for index in range(len(page_links)):
+            number = index + 1
+            page = pagination.add(li(a(number, href=page_links[index])))
+            if number == pagenum:
+                with page:
+                    attr(cls="current-page")
+
+        pagination.add(li(a("»", href=page_links[-1])))
+
+        firstpage = True if pagenum == 1 else False
+       
+        if firstpage:
+            filename = "site/index.html"
+        else:
+            os.makedirs("site/{}".format(pagenum), exist_ok=True)
+            filename = "site/{}/index.html".format(pagenum)
+
+        with open(filename, "w") as f:
+            f.write(h.render())    
+
+        pagenum += 1
 
 def populate_posts(entries):
     print("Updating posts.")
@@ -127,7 +177,7 @@ def populate_post(entry):
             content=entry['twitter_desc'])
 
         post_url = urllib.parse.urljoin(
-            home, "posts/" + entry['slug'] + ".html")
+            home, "posts/" + entry['slug'] + "/index.html")
 
         meta(property="og:url", content=post_url)
         meta(property="og:title", content=h.title)
@@ -150,12 +200,11 @@ def populate_post(entry):
 
         obit_link = a(entry['headline'], href=entry['obit_url'])
         p("New York Times obit: ", __pretty = False).add(obit_link)
-
         
         text(dc_embed, escape=False)
         
-
-    path = os.path.join("site/posts/",entry['slug'] + ".html")
+    os.makedirs("site/posts/" + entry['slug'], exist_ok=True)
+    path = os.path.join("site/posts/", entry['slug'], "index.html")
     with open(path, "w") as f:
         f.write(h.render())
 
@@ -185,7 +234,7 @@ def create_about_page():
             name="twitter:description", 
             content="FOIA The Dead is a long-term transparency project using the Freedom of Information Act. It releases FBI records on recently deceased public figures.")
 
-        about_url = urllib.parse.urljoin(home, "about.html")
+        about_url = urllib.parse.urljoin(home, "about/")
 
         meta(property="og:url", content=about_url)
         meta(property="og:title", content=h.title)
@@ -206,8 +255,31 @@ def create_about_page():
     with h.body[1]:
         text(about_html, escape=False)
 
-    with open("site/about.html", "w") as f:
+    with open("site/about/index.html", "w") as f:
         f.write(h.render())
+
+def create_feeds(entries):
+    fg = FeedGenerator()
+    fg.title('FOIA The Dead')
+    fg.author(name='FOIA The Dead', email='foia@foiathedead.org')
+    fg.link(href=home, rel='alternate')
+    fg.id(home)
+    fg.description("FOIA The Dead is a long-term transparency project using the Freedom of Information Act. It releases FBI records on recently deceased public figures.")
+
+    for entry in reversed(entries):
+        fe = fg.add_entry()
+        fe.title(entry['name'])
+        fe.link(href=urllib.parse.urljoin(home, "posts/" + entry['slug'] + "/"))
+        fe.id(urllib.parse.urljoin(home, "posts/" + entry['slug'] + "/"))
+        if entry['long_desc']:
+            fe.content(entry['long_desc'])
+        elif entry['short_desc']:
+            fe.content(entry['short_desc'])
+        else:
+            fe.content("FOIA The Dead has obtained the FBI file for {}.".format(entry['name']))
+
+    fg.atom_file('site/atom.xml', pretty=True)
+    fg.rss_file('site/rss.xml', pretty=True)
 
 def create_entries_list(cursor):
     if not os.path.exists("site/entries.json"):
@@ -253,7 +325,6 @@ def add_new_entry(entry):
 
     return entry
 
-
 def get_pagecount(doc):
     print("Fetching pagecount for {}.".format(doc))
     time.sleep(1)
@@ -269,12 +340,16 @@ def main(hp=True, about=True, posts=False, error=False):
     if len(sys.argv) < 2:
         print("""By default this program will just update the list of entries tracked by the site. To update actual pages, add any of the following flags:
 --home
+--feeds
 --about
 --posts
 --error""")
 
     if "--home" in sys.argv:
         create_homepage(entries)
+
+    if "--feeds" in sys.argv:
+        create_feeds(entries)
 
     if "--about" in sys.argv:
         create_about_page()

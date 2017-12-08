@@ -1,0 +1,438 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>https://foiathedead.org</id>
+  <title>FOIA The Dead</title>
+  <updated>2017-12-08T19:21:39.371259+00:00</updated>
+  <author>
+    <name>FOIA The Dead</name>
+    <email>foia@foiathedead.org</email>
+  </author>
+  <link href="https://foiathedead.org" rel="alternate"/>
+  <generator uri="http://lkiesow.github.io/python-feedgen" version="0.6.1">python-feedgen</generator>
+  <subtitle>FOIA The Dead is a long-term transparency project using the Freedom of Information Act. It releases FBI records on recently deceased public figures.</subtitle>
+  <entry>
+    <id>https://foiathedead.org/posts/pat-summitt/</id>
+    <title>Pat Summitt</title>
+    <updated>2017-12-08T19:21:39.375640+00:00</updated>
+    <content>&lt;p&gt;Pat Summitt was a University of Tennessee coach who is credited for the rise in prominence of women's college basketball. Her FBI file documents a series of letters intended to threaten and possibly extort her, apparently written by an unhinged fan.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/pat-summitt/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/andrzej-wajda/</id>
+    <title>Andrzej Wajda</title>
+    <updated>2017-12-08T19:21:39.375541+00:00</updated>
+    <content>&lt;p&gt;Andrzej Wajda was a Polish film and theater director who worked during the height of the Cold War. His FBI file primarily addresses a trip to Los Angeles in 1976 (probably for the Academy Awards, where his &lt;i&gt;The Promised Land&lt;/i&gt; was nominated for Best Foreign Language Film) in which one member of his group was a subject of FBI monitoring.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/andrzej-wajda/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/harry-wu/</id>
+    <title>Harry Wu</title>
+    <updated>2017-12-08T19:21:39.375468+00:00</updated>
+    <content>&lt;p&gt;Harry Hongda Wu was an activist and naturalized American citizen who traveled to China repeatedly to document human rights abuses, including the sale of organs, in the prison system there. His file primarily consists of his documenting those abuses.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/harry-wu/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/robert-e-allen/</id>
+    <title>Robert E. Allen</title>
+    <updated>2017-12-08T19:21:39.375393+00:00</updated>
+    <content>&lt;p&gt;Robert Allen was the chief executive and chairman of AT&amp;T for nearly a decade beginning in 1988—a transitional period for the U.S. telecommunications industry. His FBI file consists of background checks conducted during his AT&amp;T leadership, as he was considered for various federal government jobs.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/robert-e-allen/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/mike-davis/</id>
+    <title>Mike Davis</title>
+    <updated>2017-12-08T19:21:39.375319+00:00</updated>
+    <content>&lt;p&gt;Although he was a notable oil industry magnate and received widespread coverage when he married the Denver Post heiress 40 years his senior (after previously working as her chauffeur), Mike Davis was best known at the time of his death as the "World's Grumpiest Boss," after his 1970s-era office memos banning "levity" and even unsolicited greetings circulated online. His FBI file captures yet another facet of his life, documenting over some 200 pages a dramatic $50,000 Las Vegas extortion attempt of which he was the victim, and which involved Frank Sinatra and a number of famous casinos.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/mike-davis/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/edward-daly/</id>
+    <title>Edward Daly</title>
+    <updated>2017-12-08T19:21:39.375227+00:00</updated>
+    <content>&lt;p&gt;Father Edward Daly was a Roman Catholic bishop from Northern Ireland who achieved prominence for his role at the forefront of the protest march on what became known as "Bloody Sunday." In 1972 he visited New York, where the FBI recorded plans to monitor him and describes an interview the Bureau conducted with him at the Roosevelt Hotel.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/edward-daly/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/warren-hinckle/</id>
+    <title>Warren Hinckle</title>
+    <updated>2017-12-08T19:21:39.375152+00:00</updated>
+    <content>&lt;p&gt;Warren J. Hinckle, III was a well-known columnist and provocateur best known as the editor of Ramparts magazine and a vocal (and at times gonzo) proponent of left politics. His FBI file pertains chiefly to an investigation into an advertisement placed in 1981 seeking to recruit volunteers for an American brigade of the IRA, and also contains excerpts of his writing on Cuba.&lt;/p&gt;
+
+&lt;p&gt;Muckrock has posted &lt;a href="https://www.muckrock.com/news/archives/2017/sep/26/fbi-warren-hinckle/"&gt;a more extensive look&lt;/a&gt; into the contents of Hinckle's FBI file.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/warren-hinckle/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/trinh-thi-ngo/</id>
+    <title>Trinh Thi Ngo</title>
+    <updated>2017-12-08T19:21:39.375077+00:00</updated>
+    <content>&lt;p&gt;Trinh Thi Ngo broadcast as "Hanoi Hannah" from North Vietnam during the Vietnam War. Her show aimed to damage the morale of American troops. Her short FBI file mentions her only in passing, in a report about a similar show that was believed to be recorded within the U.S.—the show hosts claimed to be in the Watts neighborhood of Los Angeles—and shipped to Vietnam for broadcast there.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/trinh-thi-ngo/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/david-bunnell/</id>
+    <title>David Bunnell</title>
+    <updated>2017-12-08T19:21:39.375003+00:00</updated>
+    <content>&lt;p&gt;David Bunnell was one of the founding figures of the computer trade publication industry, involved in founding PC Magazine, Macworld and others. Before that, though, he was involved in New Left politics at the University of Nebraska, where as a student in 1968 he served as the president of the Students for a Democratic Society chapter. His FBI file tracks that group's activities during his tenure there.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/david-bunnell/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/hugh-o-brian/</id>
+    <title>Hugh O'Brian</title>
+    <updated>2017-12-08T19:21:39.374930+00:00</updated>
+    <content>&lt;p&gt;Hugh O'Brian was an American actor best known for his portrayal of Wyatt Earp during the height of the popularity of Western TV shows. His fame led to an invitation from Nobel Prize winning Dr. Albert Schweitzer to a hospital in Gabon, which inspired O'Brian to start a non-profit foundation for youth leadership. His FBI file consists of correspondence between the Bureau and his foundation, which invited multiple FBI directors to speak at events.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/hugh-o-brian/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/elaine-lustig-cohen/</id>
+    <title>Elaine Lustig Cohen</title>
+    <updated>2017-12-08T19:21:39.374857+00:00</updated>
+    <content>&lt;p&gt;Elaine Lustig Cohen was a painter and graphic designer responsible for the signage on the Seagram's Building, among many other clients. In the late 1960s, the FBI maintained a short file on her—including monitoring her international travel—and her husband, Arthur A. Cohen. The file includes some sensitive personal details about their marriage.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/elaine-lustig-cohen/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/nina-ponomareva/</id>
+    <title>Nina Ponomareva</title>
+    <updated>2017-12-08T19:21:39.374785+00:00</updated>
+    <content>&lt;p&gt;Nina Ponomoreva was an Olympic discus thrower from the Soviet Union. In 1956 she was involved in a minor diplomatic crisis, when she was accused (and found guilty) of shoplifting hats in the United Kingdom. Her short FBI file consists of newspaper reports of that incident and its fallout.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/nina-ponomareva/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/sammy-lee/</id>
+    <title>Sammy Lee</title>
+    <updated>2017-12-08T19:21:39.374711+00:00</updated>
+    <content>&lt;p&gt;Sammy Lee was the first Asian-American man to win an Olympic gold medal for the United States. He subsequently worked as a doctor and coach, and was honored by six U.S. presidents. In 1990, he was appointed to the President's Council on Physical Fitness and Sport, and his FBI file mostly pertains to the background check required for that position.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/sammy-lee/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/ahmed-h-zewail/</id>
+    <title>Ahmed H. Zewail</title>
+    <updated>2017-12-08T19:21:39.374636+00:00</updated>
+    <content>&lt;p&gt;Ahmed Zewail was a chemist and Nobel Prize winner who worked in the Obama White House as a science adviser. His file consists of background checks conducted for that position, conducted between 2008 and 2012.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/ahmed-h-zewail/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/coca-crystal/</id>
+    <title>Coca Crystal</title>
+    <updated>2017-12-08T19:21:39.374549+00:00</updated>
+    <content>&lt;p&gt;Coca Crystal was a counterculture activist and TV personality associated with New York City. Her file covers meetings she planned, attended, or led in the early 1970s, including one to protest Nixon's inauguration.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/coca-crystal/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/gus-savage/</id>
+    <title>Gus Savage</title>
+    <updated>2017-12-08T19:21:39.374463+00:00</updated>
+    <content>&lt;p&gt;Gus Savage worked as a civil rights activist and spokesman for the Progressive Party before he was elected to Congress to represent the South Side of Chicago. His lengthy FBI file covers that earlier activism, an (unsuccessful) loyalty check during an application for a federal government job, and investigations into threats against him during his time in office.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/gus-savage/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/robert-bennett/</id>
+    <title>Robert Bennett</title>
+    <updated>2017-12-08T19:21:39.374377+00:00</updated>
+    <content>&lt;p&gt;Years before Robert Foster Bennett served as Senator from Utah, he ran a public relations company that counted Howard Hughes as a client and once employed Watergate burglar E. Howard Hunt. His FBI file pertains to a $50,000 political donation from Hughes to the Nixon re-election effort — a payment that Bennett coordinated with Gordon Liddy.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/robert-bennett/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/ben-h-bagdikian/</id>
+    <title>Ben H. Bagdikian</title>
+    <updated>2017-12-08T19:21:39.374284+00:00</updated>
+    <content>&lt;p&gt;Before reporter Ben Bagdikian covered the Pentagon Papers for the &lt;i&gt;Washington Post&lt;/i&gt;, he was the author of a series of critical articles about official secrecy and "loyalty checks" in federal law enforcement. These writings landed him on the bad side of J. Edgar Hoover, which resulted in decades of scrutiny.&lt;/p&gt;
+
+&lt;p&gt;The Bureau subsequently collected and summarized his major writing, including a series of 12 articles on news magazines and their effect on politics. (Those summaries, and the articles they address, are included in this file.)&lt;/p&gt;
+
+&lt;p&gt;But it was his 1961 article about the 37th anniversary of J. Edgar Hoover's appointment as chief that most rankled. Hoover annotated a copy of the article, asking that Bagdikian be removed from all Bureau mailings. He reportedly called the article "utter bunk."&lt;/p&gt;
+
+&lt;p&gt;Bagdikian was likely aware of his reputation within the Bureau, but would have had it confirmed when, in 1975, he filed a Freedom of Information Act request for his own file. That request, and the follow-up communications (including his check for $8.50 and a notarized signature) are also included in this file.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/ben-h-bagdikian/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/sam-iacobellis/</id>
+    <title>Sam Iacobellis</title>
+    <updated>2017-12-08T19:21:39.374214+00:00</updated>
+    <content>&lt;p&gt;Sam Iacobellis is the engineer credited with developing the B-1 bomber, an American stealth long-range aircraft that affected the course of the Cold War. His short file contains a report of contact with an official—possibly one from the USSR—and an FBI decision not to interview him afterward.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/sam-iacobellis/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/norma-mccorvey/</id>
+    <title>Norma McCorvey</title>
+    <updated>2017-12-08T19:21:39.374131+00:00</updated>
+    <content>&lt;p&gt;Norma McCorvey was the plaintiff, under the pseudonym Jane Roe, of the landmark 1973 Supreme Court case ruling state anti-abortion laws unconstitutional. Her FBI file is focused on a 1989 incident, days before she was to participate in an abortion rights rally, in which unknown suspects fired a shotgun at her home and car.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/norma-mccorvey/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/madeleine-sherwood/</id>
+    <title>Madeleine Sherwood</title>
+    <updated>2017-12-08T19:21:39.374042+00:00</updated>
+    <content>&lt;p&gt;Madeline Sherwood was an actress most notable for her role in the 1960s television series "The Flying Nun." She had previously been married to the playwright Robert Sherwood, whom the FBI believed to be involved with Communism. This file describes an effort to locate her, to interview her, and the decision not to approach her directly.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/madeleine-sherwood/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/jack-t-chick/</id>
+    <title>Jack T. Chick</title>
+    <updated>2017-12-08T19:21:39.373955+00:00</updated>
+    <content>&lt;p&gt;Fundamentalist Christian cartoonist Jack Chick wrote to J. Edgar Hoover in 1971 seeking the FBI's help with his bizarre religious comics. His file consists of that letter and Hoover's response declining to participate. A &lt;a href="https://boingboing.net/2017/03/10/funnybooks-and-feebs.html"&gt;longer write-up of this file&lt;/a&gt; has been published at Boing Boing.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/jack-t-chick/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/walter-kohn/</id>
+    <title>Walter Kohn</title>
+    <updated>2017-12-08T19:21:39.373866+00:00</updated>
+    <content>&lt;p&gt;Nobel laureate Walter Kohn left Austria as a child refugee in 1940, coming to Canada and eventually to the United States to study and teach physics. He was the founding director of the Institute for Theoretical Physics at UC Santa Barbara, helped establish a program for Judaic studies at UC San Diego, and taught at Harvard and Carnegie Mellon. His FBI file consists of an extensive background check for a Department of Energy job in the late 1980s.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/walter-kohn/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/hedy-epstein/</id>
+    <title>Hedy Epstein</title>
+    <updated>2017-12-08T19:21:39.373788+00:00</updated>
+    <content>&lt;p&gt;Hedy Epstein, a Holocaust survivor who served as a translator in the Nuremberg trials before emigrating to the U.S., worked as an activist for various causes over a span of more than five decades. Her FBI file covers those five decades, and the overwhelming majority concerns housing discrimination cases she helped prepare in the 1970s.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/hedy-epstein/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/daniel-aaron/</id>
+    <title>Daniel Aaron</title>
+    <updated>2017-12-08T19:21:39.373689+00:00</updated>
+    <content>&lt;p&gt;Daniel Aaron was a literary critic and historian credited with pioneering the field of "American studies." His short FBI file is chiefly concerned with his contribution to a study on the role of Communism in the United States, announced in 1955.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/daniel-aaron/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/joseph-medicine-crow/</id>
+    <title>Joseph Medicine Crow</title>
+    <updated>2017-12-08T19:21:39.373596+00:00</updated>
+    <content>&lt;p&gt;Joseph Medicine Crow was a widely renowned Native American historian and anthropologist and the last living person to have heard spoken testimony from people at the Battle of the Little Bighorn. His FBI file consists only of a single-page interview he gave to special agents about a friend, a Jeep accident, and an angry mob weilding two-by-fours.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/joseph-medicine-crow/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/haskell-wexler/</id>
+    <title>Haskell Wexler</title>
+    <updated>2017-12-08T19:21:39.373503+00:00</updated>
+    <content>&lt;p&gt;Haskell Wexler was the award-winning filmmaker known for "Medium Cool" (1969) and others. The FBI monitored him before and after his 1976 documentary "Underground," about the radical Weathermen, and attempted to subpoena his raw footage.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/haskell-wexler/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/king-bhumibol-aduljadej/</id>
+    <title>King Bhumibol Aduljadej</title>
+    <updated>2017-12-08T19:21:39.373414+00:00</updated>
+    <content>&lt;p&gt;Bhumibol Aduljadej was king of Thailand for 70 years. In 2000, Thai law enforcement requested the FBI’s help in locating a "disrespectful" online impersonator.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/king-bhumibol-aduljadej/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/michael-mariotte/</id>
+    <title>Michael Mariotte</title>
+    <updated>2017-12-08T19:21:39.373339+00:00</updated>
+    <content>Michael Mariotte was a prominent anti-nuclear activist throughout the 1980s, 1990s and 2000s. Before that, in 1973, he’d gotten the FBI’s attention as a member of the Youth International Party and a potential protestor at Richard Nixon’s inauguration.</content>
+    <link href="https://foiathedead.org/posts/michael-mariotte/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/morley-safer/</id>
+    <title>Morley Safer</title>
+    <updated>2017-12-08T19:21:39.373251+00:00</updated>
+    <content>Morley Safer was a Canadian journalist who came to prominence offering unvarnished coverage of the Vietnam War. After receiving a viewer complain that Safer’s reporting would be &amp;quot;destructive to morale,&amp;quot; FBI prepared a report but declined to investigate further.</content>
+    <link href="https://foiathedead.org/posts/morley-safer/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/mark-lane/</id>
+    <title>Mark Lane</title>
+    <updated>2017-12-08T19:21:39.373161+00:00</updated>
+    <content>&lt;p&gt;Mark Lane was a leading proponent of the theory that the assassination of John F. Kennedy was a conspiracy. His FBI file concerns travel in 1980 to Lebanon, but concedes that he "has been known to the Bureau since the early 1960s."&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/mark-lane/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/bill-campbell/</id>
+    <title>Bill Campbell</title>
+    <updated>2017-12-08T19:21:39.373079+00:00</updated>
+    <content>&lt;p&gt;Bill Campbell was an executive and advisor for large tech companies such as Apple and Google. His file consists primarily of an FBI interview conducted in 2007 about an options backdating scandal at Apple, where he served on the board.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/bill-campbell/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/william-l-oneill/</id>
+    <title>William L. O’Neill</title>
+    <updated>2017-12-08T19:21:39.373002+00:00</updated>
+    <content>&lt;p&gt;William O’Neill wrote a dozen books about history and radicalism through the 60s, 70s, 80s and 90s. His participation in activism was monitored by the FBI — particularly his involvement in an Fair Play for Cuba event, where he served as master of ceremonies.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/william-l-oneill/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/boutros-boutros-ghali/</id>
+    <title>Boutros Boutros-Ghali</title>
+    <updated>2017-12-08T19:21:39.372918+00:00</updated>
+    <content>&lt;p&gt;Boutros Boutros-Ghali served as the U.N. Secretary General in the post-Cold War era after decades as an Egyptian diplomat. His FBI file mostly dates to the beginning of that era, and remains heavily redacted.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/boutros-boutros-ghali/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/concepcion-picciotto/</id>
+    <title>Concepcion Picciotto</title>
+    <updated>2017-12-08T19:21:39.372829+00:00</updated>
+    <content>FOIA The Dead has obtained the FBI file for Concepcion Picciotto.</content>
+    <link href="https://foiathedead.org/posts/concepcion-picciotto/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/dr-herbert-l-abrams/</id>
+    <title>Dr. Herbert L. Abrams</title>
+    <updated>2017-12-08T19:21:39.372722+00:00</updated>
+    <content>FOIA The Dead has obtained the FBI file for Dr. Herbert L. Abrams.</content>
+    <link href="https://foiathedead.org/posts/dr-herbert-l-abrams/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/lois-weisberg/</id>
+    <title>Lois Weisberg</title>
+    <updated>2017-12-08T19:21:39.372644+00:00</updated>
+    <content>FOIA The Dead has obtained the FBI file for Lois Weisberg.</content>
+    <link href="https://foiathedead.org/posts/lois-weisberg/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/robert-stigwood/</id>
+    <title>Robert Stigwood</title>
+    <updated>2017-12-08T19:21:39.372560+00:00</updated>
+    <content>&lt;p&gt;Robert Stigwood was an Australian music and movie producer and executive who achieved international success with acts such as the Bee Gees and Eric Clapton, and films such as "Saturday Night Fever," "Grease," and "Evita." Before his &lt;a href="http://www.nytimes.com/2016/01/05/arts/music/robert-stigwood-entrepreneur-of-rock-and-film-is-dead-at-81.html"&gt;death in January 2016&lt;/a&gt;, he was frequently ranked among the wealthiest people in Britain.&lt;/p&gt;
+
+&lt;p&gt;In May and June of 1991, around the time that &lt;a href="http://articles.latimes.com/1993-12-11/entertainment/ca-728_1_director-oliver-stone"&gt;Disney aborted plans&lt;/a&gt; to fund a film version of "Evita" directed by Oliver Stone, the FBI's legal attaché in Canberra, Australia contacted the Bureau's Los Angeles and central headquarters requesting a criminal check on Stigwood after a request from an unknown party.&lt;/p&gt;
+
+&lt;p&gt;The FBI came up empty-handed after performing the requested search and checking the records of the California Department of Justice, the Bureau of Criminal Identification and Information, the Los Angeles Police Department, and the Los Angeles Count Sheriff's Department. Information about that request was furnished to the unknown party.&lt;/p&gt;
+
+&lt;p&gt;From to FBI records:&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;On 5/29/91, [REDACTED] contacted [FBI's Canberra legal attaché] concerning Stigwood.&lt;/p&gt;
+
+&lt;p&gt;He advised that Robert Stigwood ... is under consideration by [REDACTED] to be [REDACTED].&lt;/p&gt;
+
+&lt;p&gt;Stigwood is a relatively well-known Australian movie producer/director who has spent much of his life in the Hollywood California area.&lt;/p&gt;
+
+&lt;p&gt;Lead at Los Angeles, California: Conduct an indices search for any information concerning Stigwood and advise [legal attaché] Canberra for dissemination to [REDACTED]. A prompt reply would be appreciated.&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;Redacted records of that correspondence make up the entirety of Stigwood's released FBI file and are reproduced below.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/robert-stigwood/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/michael-g-oxley/</id>
+    <title>Michael G. Oxley</title>
+    <updated>2017-12-08T19:21:39.372470+00:00</updated>
+    <content>&lt;p&gt;Representative Mike Oxley, best known for his co-authorship of the anti-fraud law to emerge from the Enron scandal, was one of the &lt;a href="https://www.newsmax.com/John-Gizzi/DEA-FBI-Oxley-Sarbanes/2016/01/05/id/708181/"&gt;FBI's staunchest defenders&lt;/a&gt; in the halls of Congress throughout his tenure—and especially during the 1990s "Crypto Wars," in which the Bureau &lt;a href="https://partners.nytimes.com/library/cyber/week/092597encrypt.html"&gt;tried and failed to require law enforcement backdoors in all U.S. encryption software&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Oxley was one of two former FBI agents to serve in Congress—the other, Rep. Don Edwards, served as chair of the House Subcommittee on Civil and Constitutional Rights and &lt;a href="http://www.latimes.com/local/obituaries/la-me-don-edwards-20151003-story.html"&gt;frequently butted heads with his former employer on policy issues&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;In the years after Oxley's 1971 retirement from the FBI, he remained close with the Bureau's leadership and continued to exchange friendly correspondence. He received letters of thanks from FBI directors each time he defended the agency in the Congressional Record. Today, FOIA The Dead is publishing Oxley's complete FBI file, including the following notable points:&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;&lt;p&gt;In 1971 Oxley received personal commendation from J. Edgar Hoover for his efforts in arresting suspects involved in a bank robbery. According to Roll Call, the &lt;a href="http://www.rollcall.com/news/politics/former-rep-mike-oxley-dies"&gt;bank robbery involved the Black Panthers&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;The high quality of your efforts incident to the investigation and apprehensions of [REDACTED] and [REDACTED] the subjects of a Bank Robbery case, is indeed worthy of commendation.&lt;/p&gt;
+
+&lt;p&gt;In spite of the difficulties you encountered, you skillfully and with great dispatch effected the arrests of these Bureau fugitives without causing insurmountable problems. I am appreciative.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;/li&gt;
+
+ &lt;li&gt;&lt;p&gt;Also in 1971, Oxley received a $200 "incentive award" authorized by Hoover for working with an informant to apprehend one of the suspects in &lt;a href="http://www.nytimes.com/1971/09/24/archives/city-policeman-wearing-shield-of-slain-partner.html"&gt;the killing of NYPD officer Kenneth Nugent&lt;/a&gt;. Two of the people charged for that crime were the last people sentenced to death in New York before a State Court &lt;a href="http://www.nytimes.com/1973/06/08/archives/state-court-ends-death-sentences-appeals-bench-finds-wide.html"&gt;ruled the law unconstitutional&lt;/a&gt;; their sentences were reduced to 25 years to life.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;p&gt;A section of the FBI's August 1969 pre-employment background check is representative of the Bureau's concerns in the era:&lt;/p&gt;
+
+&lt;blockquote&gt;[REDACTED], A NON-HIPPIE TYPE INDIVIDUAL RESIDING AT [REDACTED], ADVISED THAT [REDACTED] LIVES WITH HIM AT THIS ADDRESS AND IS SINGLE. ... STATED [REDACTED] IS NOT A HIPPIES [sic]. ALTHOUGH HE WEARS LONG HAIR.&lt;/blockquote&gt;
+
+&lt;/li&gt;&lt;/ul&gt;</content>
+    <link href="https://foiathedead.org/posts/michael-g-oxley/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/dale-bumpers/</id>
+    <title>Dale Bumpers</title>
+    <updated>2017-12-08T19:21:39.372377+00:00</updated>
+    <content>FOIA The Dead has obtained the FBI file for Dale Bumpers.</content>
+    <link href="https://foiathedead.org/posts/dale-bumpers/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/walter-j-leonard/</id>
+    <title>Walter J. Leonard</title>
+    <updated>2017-12-08T19:21:39.372296+00:00</updated>
+    <content>&lt;p&gt;Walter Jewell Leonard was best known as the &lt;a href="http://www.nytimes.com/2015/12/17/education/walter-j-leonard-pioneer-of-affirmative-action-in-harvard-admissions-dies-at-86.html"&gt;architect of Harvard's influential affirmative action program&lt;/a&gt; beginning in 1969. The admissions policy has been emulated by schools around the country and the world. In 1955, he was investigated by the FBI during an application of his own, to serve as a corrections officer in an Atlanta federal prison.&lt;/p&gt;
+
+&lt;p&gt;The overwhelming majority of Leonard's FBI file is the product of that investigation, which included exhaustive background checks into his education, his Coast Guard service, his employment history, and his finances ("All offices note Appli[cant]'s poor credit rating," p. 17). Unsurprisingly, that history reflects the Jim Crow south in which Leonard was raised, including conflicting and ultimately discredited stories about insubordination and even embezzlement at various jobs.&lt;/p&gt;
+
+&lt;p&gt;One example: he worked as a waiter at the restaurant O'Donnell's Sea Grill from 1950-1, and reportedly was fired for refusing to serve another cashier. Further FBI inquiries showed that Leonard was not at fault for the incident—"his discharge was the result of a misunderstanding and [the office manager of the restaurant] now felt that the applicant was not reprehensible." In the FBI's own words in 1966: "Atlanta file shows that LEONARD was discharged from two jobs in Washington, D.C., and had poor credit rating while there; however, there appears to be some question as to whether he was actually discharged or resigned. There also appears to be some question as to whether these actions by the employers were justified or had a sound basis." (p. 68)&lt;/p&gt;
+
+&lt;p&gt;But the records from after the application are even more illuminating about the work that would eventually win him national recognition. He received the prison job but was terminated seven months later, in October 1955. His file includes excerpts from a letter he wrote to the warden at the time.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;LEONARD wrote that in connection with the decision by the Board of Supervisors to terminate his services, he wished to appraise the Warden of some "rumors" and "falsehoods." He mentions allegations made to the effect that he was a "spy" for the Bureau of Prisons and that he was placed at Atlanta to "break down segregation" and push for "integration." The letter notes that "these things are out of proportion to common sense." LEONARD continued, "It has been suggested that I have aired views, contrary to institution practice, along racial lines. If I knew who started this absurd propaganda, I would feel inclined to institute a suit for libel. &lt;strong&gt;Even if I had observed some discrimination, I am intelligent enough to realize I don't have the authority to contradict the administration of this institution."&lt;/strong&gt; ...&lt;/p&gt;
+
+&lt;p&gt;"I do not want to think that there was a racial angle to the opinion of my supervisors. I have written the Bureau, I have made no mention of this point; wanting to discuss this with you personally. I am not interested in the personal whims, prejudices, or selfish motives of anyone. My purpose is to &lt;u&gt;do&lt;/u&gt; and &lt;u&gt;keep&lt;/u&gt; a job.&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;(pp. 72-3. Emphasis added.)&lt;/p&gt;
+
+&lt;p&gt;Of course, some 15 years later Leonard would go on to have the authority at an institution where he was able to correct discrimination.&lt;/p&gt;
+
+&lt;p&gt;Some records from his file from that era are largely redacted. Context suggests that, in 1956, the FBI contacted Leonard to evaluate his suitability as an informant about the activities of members of the Nation of Islam, due to his position as office manager at "Forrest Arms Hotel, ... where three of the Assistant Ministers of the Atlanta Temple reside ... He has been asked to attend their meetings and although he has not yet attended, he stated he will in the near future." (p. 68)&lt;/p&gt;
+
+&lt;p&gt;The question of his informing seems to be mooted when Leonard lost that job and, in August of 1956, Leonard moved to Chicago, as one of millions of African American participants in the greater sociological phenomenon dubbed &lt;a href="https://en.wikipedia.org/wiki/Second_Great_Migration_(African_American)"&gt;The Great Migration&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Finally, in 1979, a review of his file was made in advance of Leonard's &lt;a href="http://www.presidency.ucsb.edu/ws/index.php?pid=32240"&gt;presidential appointment by Jimmy Carter&lt;/a&gt; to serve on the United States Naval Academy &lt;a href="https://www.usna.edu/PAO/Superintendent/bov.html"&gt;Board of Visitors&lt;/a&gt;.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/walter-j-leonard/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/john-trudell/</id>
+    <title>John Trudell</title>
+    <updated>2017-12-08T19:21:39.372157+00:00</updated>
+    <content>FOIA The Dead has obtained the FBI file for John Trudell.</content>
+    <link href="https://foiathedead.org/posts/john-trudell/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/marcus-klingberg/</id>
+    <title>Marcus Klingberg</title>
+    <updated>2017-12-08T19:21:39.372065+00:00</updated>
+    <content>FOIA The Dead has obtained the FBI file for Marcus Klingberg.</content>
+    <link href="https://foiathedead.org/posts/marcus-klingberg/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/gene-norman/</id>
+    <title>Gene Norman</title>
+    <updated>2017-12-08T19:21:39.371960+00:00</updated>
+    <content>&lt;h3&gt;Legendary jazz producer investigated for Chicken Dance travel behind Iron Curtain&lt;/h3&gt;
+
+&lt;p&gt;Jazz legend Gene Norman was flagged by the FBI for a pair of 1984 trips to Poland, which was at the time under Cold War era travel restrictions. Norman, born Julian Nabatoff in Brooklyn in 1922, was himself the son of Russian immigrants. He and his travel companions were only able to fly to Poland via Montreal.&lt;/p&gt;
+
+&lt;p&gt;On the Polish trips that garnered FBI attention, he was accompanied by a musician who had recently recorded a Norman-produced hit version of "Dance, Little Bird," more commonly known as "The Chicken Dance." According to FBI records, the trip was at the behest of the Polish state music and entertainment agency Ars Polonia to mark the release of the record in that country.&lt;/p&gt;
+
+&lt;p&gt;That performer's name is redacted in the released FBI files, but context indicates that it was  Wisconsin Area Music Industry's Hall of Fame inductee Bob Kames, who &lt;a href="http://archive.jsonline.com/news/milwaukee/29539139.html"&gt;became known as "The Chicken Dance King" by the time of his death in 2008&lt;/a&gt;. This clip of Kames performing the song with his family band in a 1980s Christmas special likely dates a few years after the Polish travel.&lt;/p&gt;
+
+&lt;div style="position:relative;height:0;padding-bottom:75.0%"&gt;&lt;iframe src="https://www.youtube-nocookie.com/embed/qdCk7uzWNhI?rel=0?ecver=2" width="480" height="360" frameborder="0" style="position:absolute;width:100%;height:100%;left:0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/div&gt;
+
+&lt;p&gt;The version they recorded reportedly sold 300,000 copies in Poland. Kames said of its success: "I get 2 cents out from each 35-cent record sold. When they sold 300,000 records, they gave me a gold record. Of course, I can't take the money out of the country."&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/gene-norman/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/jacqueline-berrien/</id>
+    <title>Jacqueline Berrien</title>
+    <updated>2017-12-08T19:21:39.371865+00:00</updated>
+    <content>FOIA The Dead has obtained the FBI file for Jacqueline Berrien.</content>
+    <link href="https://foiathedead.org/posts/jacqueline-berrien/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/fred-thompson/</id>
+    <title>Fred Thompson</title>
+    <updated>2017-12-08T19:21:39.371755+00:00</updated>
+    <content>FOIA The Dead has obtained the FBI file for Fred Thompson.</content>
+    <link href="https://foiathedead.org/posts/fred-thompson/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/willis-carto/</id>
+    <title>Willis Carto</title>
+    <updated>2017-12-08T19:21:39.371671+00:00</updated>
+    <content>&lt;p&gt;Willis Carto was a far-right activist and Holocaust denier whose work was denounced by groups like the Southern Poverty Law Center and the Anti-Defamation League. Matt Novak at Gizmodo has done &lt;a href="https://paleofuture.gizmodo.com/fbi-releases-file-on-willis-carto-neo-nazi-recently-bu-1783195062"&gt;an extensive write-up&lt;/a&gt; of the contents of Carto's FBI file.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/willis-carto/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/licio-gelli/</id>
+    <title>Licio Gelli</title>
+    <updated>2017-12-08T19:21:39.371589+00:00</updated>
+    <content>&lt;p&gt;Licio Gelli was a prominent Italian financier and self-professed fascist who was investigated as the head of a secret society (illegal in his native Italy) and later convicted for bank fraud and a host of other crimes.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/licio-gelli/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/e-virgil-conway/</id>
+    <title>E. Virgil Conway</title>
+    <updated>2017-12-08T19:21:39.371492+00:00</updated>
+    <content>&lt;p&gt;Before Virgil Conway was the chairman of New York City MTA, he was a banker—first for the state, and then as chairman and chief executive of Seaman's Bank. At that time, he also served as an SAC Contact to the FBI; his file consists mostly of communications between him and agents in the Bureau and descriptions of events he and other official contacts attended.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/e-virgil-conway/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>https://foiathedead.org/posts/luther-burden/</id>
+    <title>Luther Burden</title>
+    <updated>2017-12-08T19:21:39.371351+00:00</updated>
+    <content>&lt;p&gt;Luther "Ticky" Burden was a &lt;a href="http://www.timesunion.com/local/article/Ticky-Burden-s-rise-fall-and-rise-3897542.php"&gt;professional basketball player&lt;/a&gt; with the New York Knicks from 1976-77. In 1981, he was convicted of taking part in a bank robbery. In 1984, &lt;a href="http://www.nytimes.com/1984/01/31/sports/retrial-ordered-for-burden-ex-knick.html"&gt;that conviction was overturned&lt;/a&gt; when the New York State Supreme Court ruled his home had been illegally searched without a warrant. He later pled guilty to &lt;a href="http://www.nytimes.com/1984/07/03/sports/sports-people-burden-pleads-guilty.html"&gt;possession of $400&lt;/a&gt; of the stolen money. He &lt;a href="http://www.nytimes.com/2015/11/04/sports/basketball/luther-burden-former-knick-who-served-time-for-bank-robbery-dies-at-62.html"&gt;died in November 2015&lt;/a&gt; in Winston-Salem.&lt;/p&gt;
+
+&lt;p&gt;In July 1980, shortly after his arrest, the FBI wrote to the United States Attorney in Eastern District of New York to report that an Assistant US Attorney had declined to federally prosecute Burden, in favor of local prosecution. That letter, which made up the entirety of Burden's released FBI file, is reproduced below.&lt;/p&gt;</content>
+    <link href="https://foiathedead.org/posts/luther-burden/" rel="alternate"/>
+  </entry>
+</feed>
