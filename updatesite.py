@@ -92,10 +92,12 @@ def create_numbered_page(entries):
 
         comment("Looking to scrape this page? Almost everything is available in entries.json.")
 
+    about_url = urllib.parse.urljoin(home, "about")
+
     headline = h1(
         "FOIA The Dead has released {pagecount:,} pages of FBI records on {entrycount} public figures. ".format(**locals()),
         id="headline", __pretty = False)
-    about_link = a("read more »", href="about",
+    about_link = a("read more »", href=about_url,
         id="about-link")
 
     h.body[0].add(headline).add(about_link)
