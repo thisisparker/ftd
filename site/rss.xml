@@ -6,7 +6,41 @@
     <description>FOIA The Dead is a long-term transparency project using the Freedom of Information Act. It releases FBI records on recently deceased public figures.</description>
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>python-feedgen</generator>
-    <lastBuildDate>Fri, 09 Feb 2018 19:59:59 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 24 Jul 2018 17:30:22 +0000</lastBuildDate>
+    <item>
+      <title>Robert Parry</title>
+      <link>https://foiathedead.org/posts/robert-parry/</link>
+      <description>&lt;p&gt;Robert Parry was an investigative journalist best known for his groundbreaking coverage of the Iran–Contra Affair while at the Associated Press. His short FBI file documents an investigation into a Students for a Democratic Society (SDS) chapter he founded at his alma mater.&lt;/p&gt;
+
+&lt;p&gt;The Colby College chapter he led was not apparently successful. According to the FBI report, it attracted only two freshmen, and "none of the three members were particularly enthused about the organization."&lt;/p&gt;</description>
+      <guid isPermaLink="false">https://foiathedead.org/posts/robert-parry/</guid>
+    </item>
+    <item>
+      <title>Cathleen Morawetz</title>
+      <link>https://foiathedead.org/posts/cathleen-morawetz/</link>
+      <description>&lt;p&gt;Cathleen Morawetz was a mathematician and NYU professor whose research on the motion of fluids and waves was relevant to supersonic aircraft wing design. Her file describes a monthlong visit to the Soviet Union in 1963 as part of an Exchange Agreement, as well as FBI efforts to interview her (and apparently share technical information with her) without alerting her to the identity of a particular Bureau informant.&lt;/p&gt;</description>
+      <guid isPermaLink="false">https://foiathedead.org/posts/cathleen-morawetz/</guid>
+    </item>
+    <item>
+      <title>Drue Heinz</title>
+      <link>https://foiathedead.org/posts/drue-heinz/</link>
+      <description>&lt;p&gt;Drue Heinz was a patron of the arts, publisher of &lt;i&gt;The Paris Review&lt;/i&gt;, and—for a brief stretch in 1950—an actress. Her FBI file, which mostly refers to her as Doreen Mary Maher, consists of a background check conducted in 1948, apparently in connection to employment with the Voice of America.&lt;/p&gt;</description>
+      <guid isPermaLink="false">https://foiathedead.org/posts/drue-heinz/</guid>
+    </item>
+    <item>
+      <title>Fats Domino</title>
+      <link>https://foiathedead.org/posts/fats-domino/</link>
+      <description>&lt;p&gt;Fats Domino was a pianist, singer, and songwriter who made a name as one of the biggest stars of the early rock-and-roll era. His file consists of a 1965 inquiry into one of his Cadillacs, apparently spotted during an FBI stakeout of a Philadelphia hotel that Martin Luther King was believed to be staying at.&lt;/p&gt;
+
+&lt;p&gt;The document in Domino's file is labeled "SUBJECT: MARTIN LUTHER KING, JR." and refers to an earlier &lt;a href="https://en.wikipedia.org/wiki/Airtel_(FBI)"&gt;airtel&lt;/a&gt; from the FBI's Philadelphia office. That earlier message is included below for reference, and describes an "extremely discreet spot check at the Franklin Motor Inn," during which Domino's car was spotted and—it seems—mistakenly connected with King. The original document can be found in context in MLK's &lt;a href="https://archive.org/details/fbi_file_mlk"&gt;complete FBI file&lt;/a&gt;, which runs to over 16,600 pages. The Philadelphia airtel begins on page 49 of file 32.&lt;/p&gt;</description>
+      <guid isPermaLink="false">https://foiathedead.org/posts/fats-domino/</guid>
+    </item>
+    <item>
+      <title>C. Weston Houck</title>
+      <link>https://foiathedead.org/posts/c-weston-houck/</link>
+      <description>&lt;p&gt;Judge C. Weston Houck presided over a lawsuit brought by Shannon Faulkner against South Carolina's public military college, The Citadel. His ruling in that case ended the Citadel's 152-year-old male-only admissions policy. His FBI file primarily addresses an incident wherein a man upset by that case engaged in behavior that could have been construed as a threat.&lt;/p&gt;</description>
+      <guid isPermaLink="false">https://foiathedead.org/posts/c-weston-houck/</guid>
+    </item>
     <item>
       <title>Pat Summitt</title>
       <link>https://foiathedead.org/posts/pat-summitt/</link>

@@ -261,6 +261,8 @@ def create_about_page():
         f.write(h.render())
 
 def create_feeds(entries):
+    print("Updating feeds.")
+
     fg = FeedGenerator()
     fg.title('FOIA The Dead')
     fg.author(name='FOIA The Dead', email='foia@foiathedead.org')
