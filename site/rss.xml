@@ -6,7 +6,13 @@
     <description>FOIA The Dead is a long-term transparency project using the Freedom of Information Act. It releases FBI records on recently deceased public figures.</description>
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>python-feedgen</generator>
-    <lastBuildDate>Tue, 24 Jul 2018 17:30:22 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 14 Dec 2018 20:38:52 +0000</lastBuildDate>
+    <item>
+      <title>Fred Thompson</title>
+      <link>https://foiathedead.org/posts/fred-thompson/</link>
+      <description>&lt;p&gt;Fred Thompson was an actor, a Tennessee senator from 1994 to 2003, and a 2008 presidential candidate. His FBI file involves investigations of threatening calls and letters received by Thompson's Senate office, and a background check for clearance to classified information as special counsel to the Senate Intelligence Committee.&lt;/p&gt;</description>
+      <guid isPermaLink="false">https://foiathedead.org/posts/fred-thompson/</guid>
+    </item>
     <item>
       <title>Robert Parry</title>
       <link>https://foiathedead.org/posts/robert-parry/</link>
@@ -383,12 +389,6 @@
       <link>https://foiathedead.org/posts/jacqueline-berrien/</link>
       <description>FOIA The Dead has obtained the FBI file for Jacqueline Berrien.</description>
       <guid isPermaLink="false">https://foiathedead.org/posts/jacqueline-berrien/</guid>
-    </item>
-    <item>
-      <title>Fred Thompson</title>
-      <link>https://foiathedead.org/posts/fred-thompson/</link>
-      <description>FOIA The Dead has obtained the FBI file for Fred Thompson.</description>
-      <guid isPermaLink="false">https://foiathedead.org/posts/fred-thompson/</guid>
     </item>
     <item>
       <title>Willis Carto</title>

@@ -1,5 +1,18 @@
 [
     {
+        "documentcloud_id": "3475333-Fred-Thompson-FBI-File",
+        "documentcloud_url": "https://www.documentcloud.org/documents/3475333-Fred-Thompson-FBI-File",
+        "fb_desc": "Fred Thompson was an actor, a Tennessee senator from 1994 to 2003, and a 2008 presidential candidate. His FBI file involves investigations of threatening calls and letters received by Thompson's Senate office, and a background check for clearance to classified information as special counsel to the Senate Intelligence Committee.",
+        "headline": "Fred Thompson, Former Senator, Actor and Presidential Candidate, Dies at 73",
+        "long_desc": "<p>Fred Thompson was an actor, a Tennessee senator from 1994 to 2003, and a 2008 presidential candidate. His FBI file involves investigations of threatening calls and letters received by Thompson's Senate office, and a background check for clearance to classified information as special counsel to the Senate Intelligence Committee.</p>",
+        "name": "Fred Thompson",
+        "obit_url": "https://www.nytimes.com/2015/11/02/us/politics/fred-thompson-former-senator-actor-and-presidential-candidate-dies-at-73.html",
+        "pages": 161,
+        "short_desc": "<p>Fred Thompson was an actor, a Tennessee senator from 1994 to 2003, and a 2008 presidential candidate. His FBI file involves investigations of threatening calls and letters received by Thompson's Senate office, and a background check for clearance to classified information as special counsel to the Senate Intelligence Committee.</p>",
+        "slug": "fred-thompson",
+        "twitter_desc": "Fred Thompson was an actor, a Tennessee senator from 1994 to 2003, and a 2008 presidential candidate. His FBI file involves investigations of threatening calls and letters received by Thompson's Senate office, and a background check for clearance to classified information as special counsel to the Senate Intelligence Committee."
+    },
+    {
         "documentcloud_id": "4616982-Robert-Parry-FBI-File",
         "documentcloud_url": "https://www.documentcloud.org/documents/4616982-Robert-Parry-FBI-File",
         "fb_desc": "Robert Parry was an investigative journalist best known for his groundbreaking coverage of the Iran\u2013Contra Affair while at the Associated Press. His short FBI file documents an investigation into a Students for Democratic Society chapter he founded at his alma mater.",
@@ -648,19 +661,6 @@
         "short_desc": null,
         "slug": "jacqueline-berrien",
         "twitter_desc": "FBI file and information about Jacqueline Berrien."
-    },
-    {
-        "documentcloud_id": "3475333-Fred-Thompson-FBI-File",
-        "documentcloud_url": "https://www.documentcloud.org/documents/3475333-Fred-Thompson-FBI-File",
-        "fb_desc": "FBI file and information about Fred Thompson.",
-        "headline": "Fred Thompson, Former Senator, Actor and Presidential Candidate, Dies at 73",
-        "long_desc": null,
-        "name": "Fred Thompson",
-        "obit_url": "https://www.nytimes.com/2015/11/02/us/politics/fred-thompson-former-senator-actor-and-presidential-candidate-dies-at-73.html",
-        "pages": 161,
-        "short_desc": null,
-        "slug": "fred-thompson",
-        "twitter_desc": "FBI file and information about Fred Thompson."
     },
     {
         "documentcloud_id": "3475322-Willis-Carto-FBI-File",
