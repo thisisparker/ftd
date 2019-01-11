@@ -6,7 +6,19 @@
     <description>FOIA The Dead is a long-term transparency project using the Freedom of Information Act. It releases FBI records on recently deceased public figures.</description>
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>python-feedgen</generator>
-    <lastBuildDate>Fri, 14 Dec 2018 20:38:52 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 11 Jan 2019 20:40:49 +0000</lastBuildDate>
+    <item>
+      <title>Jacqueline Berrien</title>
+      <link>https://foiathedead.org/posts/jacqueline-berrien/</link>
+      <description>&lt;p&gt;Jacqueline Berrien chaired the Equal Employment Opportunity Commission under President Obama. Her FBI file consists of a background check related to that appointment.&lt;/p&gt;</description>
+      <guid isPermaLink="false">https://foiathedead.org/posts/jacqueline-berrien/</guid>
+    </item>
+    <item>
+      <title>Concepcion Picciotto</title>
+      <link>https://foiathedead.org/posts/concepcion-picciotto/</link>
+      <description>&lt;p&gt;Concepción Picciotto was a peace activist who held a continuous vigil across the street from the White House from 1981 until ten days before her death in 2016. Her FBI file includes documentation of several complaints to the FBI, including self-published pamphlets.&lt;/p&gt;</description>
+      <guid isPermaLink="false">https://foiathedead.org/posts/concepcion-picciotto/</guid>
+    </item>
     <item>
       <title>Fred Thompson</title>
       <link>https://foiathedead.org/posts/fred-thompson/</link>
@@ -260,12 +272,6 @@
       <guid isPermaLink="false">https://foiathedead.org/posts/boutros-boutros-ghali/</guid>
     </item>
     <item>
-      <title>Concepcion Picciotto</title>
-      <link>https://foiathedead.org/posts/concepcion-picciotto/</link>
-      <description>FOIA The Dead has obtained the FBI file for Concepcion Picciotto.</description>
-      <guid isPermaLink="false">https://foiathedead.org/posts/concepcion-picciotto/</guid>
-    </item>
-    <item>
       <title>Dr. Herbert L. Abrams</title>
       <link>https://foiathedead.org/posts/dr-herbert-l-abrams/</link>
       <description>FOIA The Dead has obtained the FBI file for Dr. Herbert L. Abrams.</description>
@@ -383,12 +389,6 @@
 
 &lt;p&gt;The version they recorded reportedly sold 300,000 copies in Poland. Kames said of its success: "I get 2 cents out from each 35-cent record sold. When they sold 300,000 records, they gave me a gold record. Of course, I can't take the money out of the country."&lt;/p&gt;</description>
       <guid isPermaLink="false">https://foiathedead.org/posts/gene-norman/</guid>
-    </item>
-    <item>
-      <title>Jacqueline Berrien</title>
-      <link>https://foiathedead.org/posts/jacqueline-berrien/</link>
-      <description>FOIA The Dead has obtained the FBI file for Jacqueline Berrien.</description>
-      <guid isPermaLink="false">https://foiathedead.org/posts/jacqueline-berrien/</guid>
     </item>
     <item>
       <title>Willis Carto</title>
