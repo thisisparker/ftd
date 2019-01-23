@@ -111,7 +111,8 @@ def send_muckrock(request):
     try:
         pdfkit.from_url(req_url,
                 "pdfs/" + req_pdf_filename,
-                options={'quiet': '', 'disable-javascript': ''})
+                options={'quiet': '', 'disable-javascript': '', 'no-outline': '',
+                         'no-images': '', 'page-size': 'letter'})
     except OSError as error:
         if "code 1" in str(error):
             print("\nAn OSError occurred, but it's probably not a big deal.")
