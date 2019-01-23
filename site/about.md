@@ -8,4 +8,4 @@ Since October 2017, FOIA The Dead has been a special project of the [Freedom of 
 
 Since March 2017, FOIA The Dead has used MuckRock to submit and track its requests with the FBI. Browse through [MuckRock's FOIA resources](https://www.muckrock.com) or [read about its API](https://www.muckrock.com/api/).
 
-This project is written and maintained by [Parker Higgins](https://twitter.com/xor). You can [follow it on Twitter](https://twitter.com/foiathedead). Source code is [available on GitHub](https://github.com/thisisparker/ftd/), and most of the site is [available as JSON](https://foiathedead.org/entries.json).
+This project is written and maintained by [Parker Higgins](https://twitter.com/xor). You can [follow it on Twitter](https://twitter.com/foiathedead). Source code is [available on GitHub](https://github.com/thisisparker/ftd/), and most of the site is [available as JSON](https://foiathedead.org/entries.json). Additional thanks to [Elizabeth Yalkut](http://www.elizabethyalkut.com/) for contributing some subject bios.
