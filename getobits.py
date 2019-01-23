@@ -24,7 +24,7 @@ def edit_name(headline):
 
 def nyt_api_request(key):
     """Query NYT API and return recent obits."""
-    api_url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=type_of_material:%28%22Obituary%20%28Obit%29%22%29&sort=newest&fl=headline,web_url,snippet,pub_date&apikey=" + key
+    api_url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=type_of_material:%28%22Obituary%20%28Obit%29%22%29&sort=newest&fl=headline,web_url,snippet,pub_date&api-key=" + key
 
     res = requests.get(api_url)
     res.raise_for_status()
@@ -110,7 +110,8 @@ def send_muckrock(request):
 
     try:
         pdfkit.from_url(req_url,
-            "pdfs/" + req_pdf_filename,options={'quiet':''})
+                "pdfs/" + req_pdf_filename,
+                options={'quiet': '', 'disable-javascript': ''})
     except OSError as error:
         if "code 1" in str(error):
             print("\nAn OSError occurred, but it's probably not a big deal.")
