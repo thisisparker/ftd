@@ -133,7 +133,7 @@ body.about-page {
 }
 
 .about-page #content {
-    clear:both;
+    clear: both;
     margin-top: 4em;
 }
 
@@ -160,7 +160,7 @@ h2 a:visited {
 }
 
 #description {
-    clear:both;
+    clear: both;
     margin-top: 4em;
 }
 
@@ -171,28 +171,21 @@ h2 a:visited {
 }
 
 ul#results-list {
-    clear: both;
-    list-style-type: none;
-    margin: 0;
+    list-style: none;
     padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(4, [col] 1fr);
+    grid-gap: 1rem 3rem;
 }
-
-#results-list li {
-    display: inline-block;
-    vertical-align: top;
-    width: 90%;
-    padding: 0 1em 0 1em; 
-}
-
-@media screen and (min-width: 30em) {
-    #results-list li {
-        width:40%;
+@media screen and (max-width:30em) {
+    ul#results-list li {
+        grid-column: 1 / span 4;
     }
 }
-
-@media screen and (min-width: 80em) {
-    #results-list li {
-        width:22%;
+@media screen and (min-width:30.1em) and (max-width:80em) {
+    ul#results-list li {
+        grid-column: span 2;
     }
 }
 
@@ -313,8 +306,10 @@ ul#pagination {
 
 .clearfix:before,
 .clearfix:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */
 }
 
 .clearfix:after {
@@ -332,9 +327,9 @@ ul#pagination {
 }
 
 @media print,
-       (-webkit-min-device-pixel-ratio: 1.25),
-       (min-resolution: 1.25dppx),
-       (min-resolution: 120dpi) {
+(-webkit-min-device-pixel-ratio: 1.25),
+(min-resolution: 1.25dppx),
+(min-resolution: 120dpi) {
     /* Style adjustments for high resolution devices */
 }
 
@@ -351,7 +346,8 @@ ul#pagination {
     *:first-letter,
     *:first-line {
         background: transparent !important;
-        color: #000 !important; /* Black prints faster:
+        color: #000 !important;
+        /* Black prints faster:
                                    http://www.sanbeiji.com/archives/953 */
         box-shadow: none !important;
         text-shadow: none !important;
@@ -363,11 +359,11 @@ ul#pagination {
     }
 
     a[href]:after {
-        content: " (" attr(href) ")";
+        content: " ("attr(href) ")";
     }
 
     abbr[title]:after {
-        content: " (" attr(title) ")";
+        content: " ("attr(title) ")";
     }
 
     /*
