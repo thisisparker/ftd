@@ -17,7 +17,7 @@ from dominate.tags import *
 from dominate.util import text
 from feedgen.feed import FeedGenerator
 
-config = yaml.load(open("config.yaml"))
+config = yaml.safe_load(open("config.yaml"))
 dc = DocumentCloud(config['dc_user'],config['dc_password'])
 
 home = "https://foiathedead.org"
@@ -53,17 +53,11 @@ def create_boilerplate_html():
 
     h.body[2].add(div(id="copyright"))
 
-    h.body[2].add(div(id="fpf"))
-
     cc_by_img_url = urllib.parse.urljoin(home, "imgs/cc-by.png")
-    fpf_img_url = urllib.parse.urljoin(home, "imgs/fpf-logo.png")
 
     with h.body.getElementById('copyright'):
         text('<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="{}" /></a>'.format(cc_by_img_url), escape = False)
 
-    with h.body.getElementById('fpf'):
-        text('<a href="https://freedom.press"><img alt="Freedom of the Press Foundation" src={} /></a>'.format(fpf_img_url), escape = False)
-    
     return h
 
 def create_numbered_page(entries):
@@ -274,7 +268,7 @@ def create_feeds(entries):
         fe = fg.add_entry()
         fe.title(entry['name'])
         fe.link(href=urllib.parse.urljoin(home, "posts/" + entry['slug'] + "/"))
-        fe.id(urllib.parse.urljoin(home, "posts/" + entry['slug'] + "/"))
+        fe.guid(urllib.parse.urljoin(home, "posts/" + entry['slug'] + "/"), permalink=True)
         if entry['long_desc']:
             fe.content(entry['long_desc'])
         elif entry['short_desc']:
