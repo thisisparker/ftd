@@ -173,10 +173,11 @@ h2 a:visited {
 ul#results-list {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 0 1rem 0 0;
     display: grid;
     grid-template-columns: repeat(4, [col] 1fr);
     grid-gap: 1rem 3rem;
+    clear: both;
 }
 @media screen and (max-width:30em) {
     ul#results-list li {
